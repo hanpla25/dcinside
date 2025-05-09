@@ -1,0 +1,208 @@
+// 유저가 회원가입시 저장할 데이터
+// 추가사항: email 대신 id 사용, email은 따로
+// 랜덤한 고유의 uid
+const users = [
+  {
+    uid: "410544b2-4001-4271-9855-fec4b6a6442a",
+    name: "User1",
+    email: "user1@nextmail.com",
+    password: "123456",
+  },
+  {
+    uid: "2d951b28-b85d-4b52-99d3-6bfb62925a0d",
+    name: "User2",
+    email: "user2@nextmail.com",
+    password: "123456",
+  },
+  {
+    uid: "8e5f8a6d-fbd7-4a33-8299-61f201f5cc0b",
+    name: "User3",
+    email: "user3@nextmail.com",
+    password: "123456",
+  },
+];
+
+// 인덱스 페이지에서만 사용할 실베 데이터 (15개)
+const bestPosts = [
+  {
+    id: "a1c0c3f3-0035-4b62-95f0-1335eec28552",
+    title: "첫 번째 실시간 베스트 글",
+    content: "이것은 첫 번째 실시간 베스트 글의 내용입니다.",
+    author: "User1",
+    date: "2025-05-08T10:00:00",
+    likes: 150,
+    comments: 12,
+    gallery: "연예갤러리",
+    url: "/board/dcbest/1"
+  },
+  {
+    id: "e2b4a0f8-7cb2-4758-a5e6-24aab58b24d6",
+    title: "두 번째 실시간 베스트 글",
+    content: "이것은 두 번째 실시간 베스트 글의 내용입니다.",
+    author: "User2",
+    date: "2025-05-08T09:30:00",
+    likes: 130,
+    comments: 15,
+    gallery: "게임갤러리",
+    url: "/board/dcbest/2"
+  },
+  {
+    id: "6d7d56a4-87fa-46db-bb0e-379b52cbed8b",
+    title: "세 번째 실시간 베스트 글",
+    content: "이것은 세 번째 실시간 베스트 글의 내용입니다.",
+    author: "User3",
+    date: "2025-05-08T09:00:00",
+    likes: 125,
+    comments: 10,
+    gallery: "정치갤러리",
+    url: "/board/dcbest/3"
+  },
+  {
+    id: "dc5d8d01-3c8a-4215-b84f-70b62eae2cb0",
+    title: "네 번째 실시간 베스트 글",
+    content: "이것은 네 번째 실시간 베스트 글의 내용입니다.",
+    author: "User4",
+    date: "2025-05-08T08:30:00",
+    likes: 110,
+    comments: 8,
+    gallery: "스포츠갤러리",
+    url: "/board/dcbest/4"
+  },
+  {
+    id: "524dc450-0e9b-4742-b3fc-f9b97bb6ff71",
+    title: "다섯 번째 실시간 베스트 글",
+    content: "이것은 다섯 번째 실시간 베스트 글의 내용입니다.",
+    author: "User5",
+    date: "2025-05-08T08:00:00",
+    likes: 100,
+    comments: 5,
+    gallery: "디자인갤러리",
+    url: "/board/dcbest/5"
+  },
+  {
+    id: "82f5b1b1-928b-4532-bd53-37015f3498db",
+    title: "여섯 번째 실시간 베스트 글",
+    content: "이것은 여섯 번째 실시간 베스트 글의 내용입니다.",
+    author: "User6",
+    date: "2025-05-08T07:30:00",
+    likes: 90,
+    comments: 4,
+    gallery: "음식갤러리",
+    url: "/board/dcbest/6"
+  },
+  {
+    id: "ad00b36a-23bc-4746-b22a-fc8e44f245ba",
+    title: "일곱 번째 실시간 베스트 글",
+    content: "이것은 일곱 번째 실시간 베스트 글의 내용입니다.",
+    author: "User7",
+    date: "2025-05-08T07:00:00",
+    likes: 85,
+    comments: 12,
+    gallery: "연예갤러리",
+    url: "/board/dcbest/7"
+  },
+  {
+    id: "a3c1f0cd-83fc-4cb5-8e9e-bc7c42e75519",
+    title: "여덟 번째 실시간 베스트 글",
+    content: "이것은 여덟 번째 실시간 베스트 글의 내용입니다.",
+    author: "User8",
+    date: "2025-05-08T06:30:00",
+    likes: 80,
+    comments: 7,
+    gallery: "게임갤러리",
+    url: "/board/dcbest/8"
+  },
+  {
+    id: "47925f96-3132-4047-b77a-14a442ab0d65",
+    title: "아홉 번째 실시간 베스트 글",
+    content: "이것은 아홉 번째 실시간 베스트 글의 내용입니다.",
+    author: "User9",
+    date: "2025-05-08T06:00:00",
+    likes: 70,
+    comments: 3,
+    gallery: "정치갤러리",
+    url: "/board/dcbest/9"
+  },
+  {
+    id: "35f3b4f5-18cb-4934-bad2-d3e64ff7b2d1",
+    title: "열 번째 실시간 베스트 글",
+    content: "이것은 열 번째 실시간 베스트 글의 내용입니다.",
+    author: "User10",
+    date: "2025-05-08T05:30:00",
+    likes: 60,
+    comments: 8,
+    gallery: "스포츠갤러리",
+    url: "/board/dcbest/10"
+  },
+  {
+    id: "b2139fc0-13c0-4b98-a0d2-e3db97b49fc7",
+    title: "열한 번째 실시간 베스트 글",
+    content: "이것은 열한 번째 실시간 베스트 글의 내용입니다.",
+    author: "User1",
+    date: "2025-05-08T05:00:00",
+    likes: 55,
+    comments: 11,
+    gallery: "디자인갤러리",
+    url: "/board/dcbest/11"
+  },
+  {
+    id: "a5f4181a-063d-4a59-b62a-d9b358ab7b6a",
+    title: "열두 번째 실시간 베스트 글",
+    content: "이것은 열두 번째 실시간 베스트 글의 내용입니다.",
+    author: "User2",
+    date: "2025-05-08T04:30:00",
+    likes: 50,
+    comments: 2,
+    gallery: "음식갤러리",
+    url: "/board/dcbest/12"
+  },
+  {
+    id: "beaf1b93-0b10-45d7-b318-b6da34868c8b",
+    title: "열세 번째 실시간 베스트 글",
+    content: "이것은 열세 번째 실시간 베스트 글의 내용입니다.",
+    author: "User3",
+    date: "2025-05-08T04:00:00",
+    likes: 45,
+    comments: 9,
+    gallery: "연예갤러리",
+    url: "/board/dcbest/13"
+  },
+  {
+    id: "aa8ed8c2-bf80-4577-b6de-bc1329d66068",
+    title: "열네 번째 실시간 베스트 글",
+    content: "이것은 열네 번째 실시간 베스트 글의 내용입니다.",
+    author: "User4",
+    date: "2025-05-08T03:30:00",
+    likes: 40,
+    comments: 5,
+    gallery: "게임갤러리",
+    url: "/board/dcbest/14"
+  },
+  {
+    id: "4f0e3a0b-bc1e-49c3-b2d9-fb332a65a50e",
+    title: "열다섯 번째 실시간 베스트 글",
+    content: "이것은 열다섯 번째 실시간 베스트 글의 내용입니다.",
+    author: "User5",
+    date: "2025-05-08T03:00:00",
+    likes: 35,
+    comments: 6,
+    gallery: "정치갤러리",
+    url: "/board/dcbest/15"
+  },
+];
+
+// 갤러리 목록
+const galleryList = [
+  {
+    name: "리그 오브 레전드",
+    url: "/leagueoflegends",
+    sort: "gallery",
+  },
+  {
+    name: "음식",
+    url: "/food",
+    sort: "mgallery",
+  },
+];
+
+export { users, bestPosts, galleryList };
