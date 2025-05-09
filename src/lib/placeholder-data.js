@@ -33,7 +33,7 @@ const bestPosts = [
     likes: 150,
     comments: 12,
     gallery: "연예갤러리",
-    url: "/board/dcbest/1"
+    url: "/board/dcbest/1",
   },
   {
     id: "e2b4a0f8-7cb2-4758-a5e6-24aab58b24d6",
@@ -44,7 +44,7 @@ const bestPosts = [
     likes: 130,
     comments: 15,
     gallery: "게임갤러리",
-    url: "/board/dcbest/2"
+    url: "/board/dcbest/2",
   },
   {
     id: "6d7d56a4-87fa-46db-bb0e-379b52cbed8b",
@@ -55,7 +55,7 @@ const bestPosts = [
     likes: 125,
     comments: 10,
     gallery: "정치갤러리",
-    url: "/board/dcbest/3"
+    url: "/board/dcbest/3",
   },
   {
     id: "dc5d8d01-3c8a-4215-b84f-70b62eae2cb0",
@@ -66,7 +66,7 @@ const bestPosts = [
     likes: 110,
     comments: 8,
     gallery: "스포츠갤러리",
-    url: "/board/dcbest/4"
+    url: "/board/dcbest/4",
   },
   {
     id: "524dc450-0e9b-4742-b3fc-f9b97bb6ff71",
@@ -77,7 +77,7 @@ const bestPosts = [
     likes: 100,
     comments: 5,
     gallery: "디자인갤러리",
-    url: "/board/dcbest/5"
+    url: "/board/dcbest/5",
   },
   {
     id: "82f5b1b1-928b-4532-bd53-37015f3498db",
@@ -88,7 +88,7 @@ const bestPosts = [
     likes: 90,
     comments: 4,
     gallery: "음식갤러리",
-    url: "/board/dcbest/6"
+    url: "/board/dcbest/6",
   },
   {
     id: "ad00b36a-23bc-4746-b22a-fc8e44f245ba",
@@ -99,7 +99,7 @@ const bestPosts = [
     likes: 85,
     comments: 12,
     gallery: "연예갤러리",
-    url: "/board/dcbest/7"
+    url: "/board/dcbest/7",
   },
   {
     id: "a3c1f0cd-83fc-4cb5-8e9e-bc7c42e75519",
@@ -110,7 +110,7 @@ const bestPosts = [
     likes: 80,
     comments: 7,
     gallery: "게임갤러리",
-    url: "/board/dcbest/8"
+    url: "/board/dcbest/8",
   },
   {
     id: "47925f96-3132-4047-b77a-14a442ab0d65",
@@ -121,7 +121,7 @@ const bestPosts = [
     likes: 70,
     comments: 3,
     gallery: "정치갤러리",
-    url: "/board/dcbest/9"
+    url: "/board/dcbest/9",
   },
   {
     id: "35f3b4f5-18cb-4934-bad2-d3e64ff7b2d1",
@@ -132,7 +132,7 @@ const bestPosts = [
     likes: 60,
     comments: 8,
     gallery: "스포츠갤러리",
-    url: "/board/dcbest/10"
+    url: "/board/dcbest/10",
   },
   {
     id: "b2139fc0-13c0-4b98-a0d2-e3db97b49fc7",
@@ -143,7 +143,7 @@ const bestPosts = [
     likes: 55,
     comments: 11,
     gallery: "디자인갤러리",
-    url: "/board/dcbest/11"
+    url: "/board/dcbest/11",
   },
   {
     id: "a5f4181a-063d-4a59-b62a-d9b358ab7b6a",
@@ -154,7 +154,7 @@ const bestPosts = [
     likes: 50,
     comments: 2,
     gallery: "음식갤러리",
-    url: "/board/dcbest/12"
+    url: "/board/dcbest/12",
   },
   {
     id: "beaf1b93-0b10-45d7-b318-b6da34868c8b",
@@ -165,7 +165,7 @@ const bestPosts = [
     likes: 45,
     comments: 9,
     gallery: "연예갤러리",
-    url: "/board/dcbest/13"
+    url: "/board/dcbest/13",
   },
   {
     id: "aa8ed8c2-bf80-4577-b6de-bc1329d66068",
@@ -176,7 +176,7 @@ const bestPosts = [
     likes: 40,
     comments: 5,
     gallery: "게임갤러리",
-    url: "/board/dcbest/14"
+    url: "/board/dcbest/14",
   },
   {
     id: "4f0e3a0b-bc1e-49c3-b2d9-fb332a65a50e",
@@ -187,7 +187,7 @@ const bestPosts = [
     likes: 35,
     comments: 6,
     gallery: "정치갤러리",
-    url: "/board/dcbest/15"
+    url: "/board/dcbest/15",
   },
 ];
 
@@ -197,6 +197,26 @@ const galleryList = [
     name: "리그 오브 레전드",
     url: "/leagueoflegends",
     sort: "gallery",
+  },
+  {
+    name: "음식",
+    url: "/food",
+    sort: "mgallery",
+  },
+  {
+    name: "음식",
+    url: "/food",
+    sort: "mgallery",
+  },
+  {
+    name: "음식",
+    url: "/food",
+    sort: "mgallery",
+  },
+  {
+    name: "음식",
+    url: "/food",
+    sort: "mgallery",
   },
   {
     name: "음식",

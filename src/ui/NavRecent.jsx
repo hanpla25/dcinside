@@ -41,12 +41,6 @@ export default function NavRecent({ onClose }) {
     (page + 1) * itemsPerPage
   );
 
-  const changePage = (newPage) => {
-    if (newPage >= 0 && newPage < totalPages) {
-      setPage(newPage);
-    }
-  };
-
   // 터치 이벤트 핸들러
   const handleTouchStart = (e) => {
     setIsTouching(true);
@@ -141,7 +135,6 @@ export default function NavRecent({ onClose }) {
           {Array.from({ length: totalPages }).map((_, idx) => (
             <button
               key={idx}
-              onClick={() => changePage(idx)}
               className={`w-3 h-3 rounded-full ${
                 page === idx ? "bg-blue-600" : "bg-gray-200"
               }`}
