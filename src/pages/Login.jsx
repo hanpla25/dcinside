@@ -14,8 +14,10 @@ export default function Login() {
   };
 
   return (
-    <div className="flex flex-col justify-center py-10">
-      <AuthForm onSubmit={handleLogin} buttonLabel="로그인" />
+    <div className="flex flex-col justify-center px-2.5 py-10">
+      <div className="self-center w-full">
+        <AuthForm onSubmit={handleLogin} buttonLabel="로그인" />
+      </div>
       <Checkbox />
       <Links />
     </div>

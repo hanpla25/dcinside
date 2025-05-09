@@ -5,7 +5,7 @@ export default function Footer() {
     <footer className="bg-[#3b4890] flex justify-center py-4">
       <Link
         to="/login"
-        className="w-11/12 max-w-md py-2 border border-gray-400 text-white rounded-md font-medium text-center"
+        className="w-11/12 py-2 border border-gray-400 text-white rounded-md font-medium text-center"
       >
         로그인
       </Link>

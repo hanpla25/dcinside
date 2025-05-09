@@ -21,14 +21,13 @@ export default function AuthForm({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // showNickname이 false면 닉네임 제거
     const dataToSubmit = { ...formData };
     if (!showNickname) delete dataToSubmit.nickname;
     onSubmit(dataToSubmit);
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 max-w-md w-full">
+    <form onSubmit={handleSubmit} className="space-y-4 w-full">
       {showNickname && (
         <input
           type="text"
