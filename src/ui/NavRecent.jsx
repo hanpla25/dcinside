@@ -30,9 +30,9 @@ export default function NavRecent({ onClose }) {
     "디자인갤러리",
     "기타갤러리",
   ];
+  const favoriteList = ["디자인갤러리", "음식갤러리"];
 
   const itemsPerPage = 8;
-  const favoriteList = ["디자인갤러리", "음식갤러리"];
 
   const fullList = tab === "recent" ? recentList : favoriteList;
   const totalPages = Math.ceil(fullList.length / itemsPerPage);

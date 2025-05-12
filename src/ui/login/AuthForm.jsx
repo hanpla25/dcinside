@@ -8,7 +8,7 @@ export default function AuthForm({
   const [formData, setFormData] = useState({
     username: "",
     password: "",
-    nickname: "", // 닉네임도 상태에 포함
+    nickname: "",
   });
 
   const handleChange = (e) => {

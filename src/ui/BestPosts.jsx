@@ -1,7 +1,7 @@
 import { Link } from "react-router";
 import { bestPosts } from "../lib/placeholder-data";
 
-export default function BestPosts() {
+export default function BestPosts({ posts }) {
   return (
     <div className="font-semibold text-lg">
       <Link to={"/dcbest"}>

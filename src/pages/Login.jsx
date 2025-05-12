@@ -1,18 +1,9 @@
-import axios from "axios";
 import AuthForm from "../ui/login/AuthForm";
 import Checkbox from "../ui/login/Checkbox";
 import Links from "../ui/login/Links";
+import { handleLogin } from "../lib/actions";
 
 export default function Login() {
-  const handleLogin = async (data) => {
-    try {
-      const res = await axios.post("http://localhost:8080/api/login", data);
-      console.log("로그인 성공:", res.data);
-    } catch (err) {
-      console.error("로그인 실패:", err);
-    }
-  };
-
   return (
     <div className="flex flex-col justify-center px-2.5 py-10">
       <div className="self-center w-full">
