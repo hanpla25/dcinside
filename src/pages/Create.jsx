@@ -1,6 +1,9 @@
+import CreateGalleryForm from "../ui/create/CreateGalleryForm";
 
 export default function Create() {
   return (
-    <div>Create</div>
-  )
+    <div className="p-10">
+      <CreateGalleryForm />
+    </div>
+  );
 }

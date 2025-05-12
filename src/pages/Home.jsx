@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
 import BestPosts from "../ui/BestPosts";
 import { fetchBestPosts } from "../lib/data";
-import { useGallery } from "../context/GalleryContext";
 
 export default function Home() {
   const [bestPosts, setBestPosts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { galleryList } = useGallery();
 
   useEffect(() => {
     fetchBestPosts()

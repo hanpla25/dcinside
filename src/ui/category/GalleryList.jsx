@@ -20,7 +20,7 @@ export default function GalleryList() {
         {galleryList.map((gall, idx) => (
           <Link
             key={gall.url + idx}
-            to={gall.url}
+            to={`/gallery${gall.url}`}
             className={`p-3 hover:bg-gray-50 border-b border-gray-300 ${
               idx % 2 === 0 ? "border-r border-gray-300" : ""
             }`}

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { recentList, favoriteList } from "../lib/placeholder-data";
 
 export default function NavRecent({ onClose }) {
   const [tab, setTab] = useState("recent");
@@ -6,31 +7,6 @@ export default function NavRecent({ onClose }) {
   const [isTouching, setIsTouching] = useState(false);
   const [startX, setStartX] = useState(0);
   const [dragOffset, setDragOffset] = useState(0);
-  const recentList = [
-    "연예갤러리",
-    "게임갤러리",
-    "정치갤러리",
-    "스포츠갤러리",
-    "자동차갤러리",
-    "음악갤러리",
-    "영화갤러리",
-    "웹툰갤러리",
-    "디자인갤러리",
-    "기타갤러리",
-    "자동차갤러리",
-    "음악갤러리",
-    "영화갤러리",
-    "웹툰갤러리",
-    "디자인갤러리",
-    "기타갤러리",
-    "자동차갤러리",
-    "음악갤러리",
-    "영화갤러리",
-    "웹툰갤러리",
-    "디자인갤러리",
-    "기타갤러리",
-  ];
-  const favoriteList = ["디자인갤러리", "음식갤러리"];
 
   const itemsPerPage = 8;
 
