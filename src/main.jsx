@@ -10,20 +10,25 @@ import Category from "./pages/Category";
 import Signup from "./pages/Signup";
 import Create from "./pages/Create";
 import { GalleryProvider } from "./context/GalleryContext";
+import { AuthProvider } from "./context/AuthContext";
+import Profile from "./pages/Profile";
 
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
-    <GalleryProvider>
-      <Header />
-      <Nav />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/category" element={<Category />} />
-        <Route path="/create" element={<Create />} />
-      </Routes>
-      <Footer />
-    </GalleryProvider>
+    <AuthProvider>
+      <GalleryProvider>
+        <Header />
+        <Nav />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/category" element={<Category />} />
+          <Route path="/create" element={<Create />} />
+        </Routes>
+        <Footer />
+      </GalleryProvider>
+    </AuthProvider>
   </BrowserRouter>
 );

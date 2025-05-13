@@ -5,19 +5,19 @@ const users = [
   {
     uid: "410544b2-4001-4271-9855-fec4b6a6442a",
     name: "User1",
-    email: "user1@nextmail.com",
+    id: "user1ID",
     password: "123456",
   },
   {
     uid: "2d951b28-b85d-4b52-99d3-6bfb62925a0d",
     name: "User2",
-    email: "user2@nextmail.com",
+    id: "user2ID",
     password: "123456",
   },
   {
     uid: "8e5f8a6d-fbd7-4a33-8299-61f201f5cc0b",
     name: "User3",
-    email: "user3@nextmail.com",
+    id: "user3ID",
     password: "123456",
   },
 ];

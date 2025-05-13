@@ -2,6 +2,7 @@ import axios from "axios";
 import {
   galleryList as placeholderGalleryList,
   bestPosts as placeholderBestPosts,
+  users as placeholderUsers,
 } from "./placeholder-data";
 
 export const fetchBestPosts = async () => {
@@ -23,3 +24,15 @@ export const fetchGalleryList = async () => {
     return placeholderGalleryList;
   }
 };
+
+export async function fetchUser() {
+  try {
+    const res = await axios.get("http://localhost:8080/api/member");
+    return res.data;
+  } catch (error) {
+    console.warn(
+      "서버에서 사용자 정보를 가져오지 못했습니다. placeholder 사용자로 대체합니다."
+    );
+    return placeholderUsers[0];
+  }
+}

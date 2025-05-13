@@ -1,6 +1,6 @@
 import { Link } from "react-router";
 
-export default function posts({ posts }) {
+export default function BestPosts({ posts }) {
   return (
     <div className="font-semibold text-lg">
       <Link to={"/dcbest"}>

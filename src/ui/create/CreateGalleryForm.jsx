@@ -29,7 +29,7 @@ export default function CreateGalleryForm() {
 
   return (
     <div className="mt-10 p-6 border rounded shadow">
-      <h2 className="text-2xl font-semibold mb-4">새 갤러리 신청</h2>
+      <h2 className="text-2xl font-semibold mb-4">새 갤러리 생성</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label className="block font-medium mb-1">이름</label>
@@ -64,7 +64,7 @@ export default function CreateGalleryForm() {
           disabled={submitting}
           className="bg-[#3b4890] text-white px-4 py-2 rounded hover:bg-[#2f3b75] disabled:opacity-50"
         >
-          {submitting ? "신청 중..." : "신청"}
+          {submitting ? "생성 중..." : "생성"}
         </button>
       </form>
     </div>
