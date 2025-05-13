@@ -1,30 +1,42 @@
 import { createContext, useContext, useState, useEffect } from "react";
-import { fetchUser } from "../lib/data";
+import { checkLoginStatus } from "../lib/api"; // 세션 검증 함수
 
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
-  const [isLogin, setIsLogin] = useState(false);
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true); // 초기 로딩 상태
 
   useEffect(() => {
-    if (isLogin && !user) {
-      fetchUser().then(setUser);
-    }
-  }, [isLogin, user]);
+    // 앱이 처음 실행될 때 세션 상태 확인
+    const fetchUser = async () => {
+      try {
+        const data = await checkLoginStatus(); // 세션 기반 로그인 확인
+        setUser(data); // 로그인된 사용자 정보 저장
+      } catch (err) {
+        setUser(null);
+      } finally {
+        setLoading(false); // 로딩 완료
+      }
+    };
 
-  const login = () => {
-    setIsLogin(true);
-    setUser(null);
+    fetchUser();
+  }, []);
+
+  const login = async () => {
+    const data = await checkLoginStatus(); // 로그인 성공 후 세션 확인
+    setUser(data);
   };
 
-  const logout = () => {
-    setIsLogin(false);
+  const logout = async () => {
+    await fetch("/api/logout", { method: "POST", credentials: "include" });
     setUser(null);
   };
 
   return (
-    <AuthContext.Provider value={{ isLogin, user, login, logout }}>
+    <AuthContext.Provider
+      value={{ user, isLogin: !!user, login, logout, loading }}
+    >
       {children}
     </AuthContext.Provider>
   );
