@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect } from "react";
-import { checkLoginStatus } from "../lib/actions";
+import { handleSignup, handleLogin } from "../lib/actions";
+import { checkLoginStatus } from "../lib/data";
 
 const AuthContext = createContext();
 
@@ -12,7 +13,7 @@ export function AuthProvider({ children }) {
       try {
         const data = await checkLoginStatus();
         setUser(data);
-      } catch (err) {
+      } catch (error) {
         setUser(null);
       } finally {
         setLoading(false);
@@ -22,19 +23,36 @@ export function AuthProvider({ children }) {
     fetchUser();
   }, []);
 
-  const login = async () => {
-    const data = await checkLoginStatus();
-    setUser(data);
+  const login = async (loginData) => {
+    try {
+      await handleLogin(loginData);
+      const data = await checkLoginStatus();
+      setUser(data);
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  const signup = async (signupData) => {
+    try {
+      await handleSignup(signupData);
+    } catch (error) {
+      throw error;
+    }
   };
 
   const logout = async () => {
-    await fetch("/api/logout", { method: "POST", credentials: "include" });
-    setUser(null);
+    try {
+      await fetch("/api/logout", { method: "POST", credentials: "include" });
+      setUser(null);
+    } catch (error) {
+      console.error("로그아웃 실패:", error);
+    }
   };
 
   return (
     <AuthContext.Provider
-      value={{ user, isLogin: !!user, login, logout, loading }}
+      value={{ user, isLogin: !!user, login, logout, signup, loading }}
     >
       {children}
     </AuthContext.Provider>

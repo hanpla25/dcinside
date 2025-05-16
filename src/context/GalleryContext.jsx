@@ -7,15 +7,26 @@ export function GalleryProvider({ children }) {
   const [galleryList, setGalleryList] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const refetchGalleryList = async () => {
+    setLoading(true);
+    try {
+      const data = await fetchGalleryList();
+      setGalleryList(data);
+    } catch (err) {
+      console.error("갤러리 로딩 실패", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    fetchGalleryList()
-      .then(setGalleryList)
-      .catch((err) => console.error("갤러리 로딩 실패", err))
-      .finally(() => setLoading(false));
+    refetchGalleryList();
   }, []);
 
   return (
-    <GalleryContext.Provider value={{ galleryList, loading }}>
+    <GalleryContext.Provider
+      value={{ galleryList, loading, refetchGalleryList }}
+    >
       {children}
     </GalleryContext.Provider>
   );

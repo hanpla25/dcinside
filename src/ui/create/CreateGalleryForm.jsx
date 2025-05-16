@@ -1,13 +1,16 @@
+// ui/create/CreateGalleryForm.js
 import { useState } from "react";
 import { createGallery } from "../../lib/actions";
 import { useNavigate } from "react-router";
 import Button from "./Button";
+import { useGallery } from "../../context/GalleryContext";
 
 export default function CreateGalleryForm() {
   const [baseName, setBaseName] = useState("");
   const [abbreviation, setAbbreviation] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const navigate = useNavigate();
+  const { refetchGalleryList } = useGallery();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -15,6 +18,7 @@ export default function CreateGalleryForm() {
     const nameWithSuffix = `${baseName.trim()} 갤러리`;
     try {
       await createGallery({ name: nameWithSuffix, abbreviation });
+      await refetchGalleryList();
       alert("갤러리 신청이 완료되었습니다!");
       setBaseName("");
       setAbbreviation("");

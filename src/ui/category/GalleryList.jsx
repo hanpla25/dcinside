@@ -19,7 +19,7 @@ export default function GalleryList() {
       <ul className="grid grid-cols-2">
         {galleryList.map((gall, idx) => (
           <Link
-            key={gall.url + idx}
+            key={gall.id + idx}
             to={`/gallery${gall.url}`}
             className={`p-3 hover:bg-gray-50 border-b border-gray-300 ${
               idx % 2 === 0 ? "border-r border-gray-300" : ""

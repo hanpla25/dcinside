@@ -5,7 +5,7 @@ import { fetchBestPosts } from "../lib/data";
 export default function Home() {
   const [bestPosts, setBestPosts] = useState([]);
   const [loading, setLoading] = useState(true);
-
+  
   useEffect(() => {
     const loadBestPosts = async () => {
       try {
@@ -17,7 +17,6 @@ export default function Home() {
         setLoading(false);
       }
     };
-
     loadBestPosts();
   }, []);
 

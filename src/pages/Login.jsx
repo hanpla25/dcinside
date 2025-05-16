@@ -1,23 +1,21 @@
 import AuthForm from "../ui/login/AuthForm";
 import Checkbox from "../ui/login/Checkbox";
 import Links from "../ui/login/Links";
-import { handleLogin } from "../lib/actions";
-import { useNavigate } from "react-router";
 import { useAuth } from "../context/AuthContext";
 import { useState } from "react";
+import { useNavigate } from "react-router";
 
 export default function Login() {
-  const navigate = useNavigate();
   const { login } = useAuth();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = async (formData) => {
     setLoading(true);
     setError(null);
     try {
-      await handleLogin(formData, navigate);
-      await login();
+      await login(formData);
     } catch (error) {
       console.error(error);
       const data = error.response?.data || {};
@@ -28,6 +26,7 @@ export default function Login() {
       });
     } finally {
       setLoading(false);
+      navigate("/");
     }
   };
 

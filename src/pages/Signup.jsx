@@ -1,26 +1,23 @@
 import AuthForm from "../ui/login/AuthForm";
-import { handleSignup } from "../lib/actions";
-import { useNavigate } from "react-router";
 import { useAuth } from "../context/AuthContext";
 import { useState } from "react";
+import { useNavigate } from "react-router";
 
 export default function Signup() {
-  const navigate = useNavigate();
-  const { login } = useAuth();
+  const { signup } = useAuth();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = async (formData) => {
     setLoading(true);
     setError(null);
     try {
-      await handleSignup(formData, navigate);
-      await login();
+      await signup(formData);
       alert("회원가입 성공!");
       navigate("/login");
     } catch (err) {
       console.error(err);
-      // 개별 필드 에러 메시지 추출
       const data = err.response?.data || {};
       setError({
         userid: data.userid || null,
