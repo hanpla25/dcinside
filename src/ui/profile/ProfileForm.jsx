@@ -63,7 +63,7 @@ export default function ProfileForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="max-w-xl mx-auto mt-10 mb-10 p-6 border rounded shadow"
+      className="mt-10 mb-10 p-6 border rounded shadow"
     >
       <div className="flex justify-between mb-6">
         <div className="text-2xl font-semibold">프로필</div>

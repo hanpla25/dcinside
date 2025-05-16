@@ -4,7 +4,10 @@ export const handleSignup = async (data, navigate) => {
   try {
     const res = await axios.post(
       "http://localhost:8080/api/member/signup",
-      data
+      data,
+      {
+        withCredentials: true,
+      }
     );
     console.log("회원가입 성공:", res.data);
     navigate("/");
@@ -42,15 +45,34 @@ export const checkLoginStatus = async () => {
   }
 };
 
-export const createGallery = async ({ name, url }) => {
+export const resign = async () => {
   try {
-    const res = await axios.post("http://localhost:8080/api/category", {
-      name,
-      url,
+    const res = await axios.delete("http://localhost:8080/api/member", {
+      withCredentials: true,
     });
+    console.log("회원 탈퇴 성공:", res.data);
     return res.data;
-  } catch (err) {
-    console.error("갤러리 생성 요청 실패:", err);
+  } catch (error) {
+    console.error("회원 탈퇴 실패:", error);
+    throw error;
+  }
+};
+
+export const createGallery = async ({ name, abbreviation }) => {
+  try {
+    const res = await axios.post(
+      "http://localhost:8080/api/category",
+      {
+        name,
+        abbreviation,
+      },
+      {
+        withCredentials: true,
+      }
+    );
+    return res.data;
+  } catch (error) {
+    console.error("갤러리 생성 요청 실패:", error);
     throw error;
   }
 };

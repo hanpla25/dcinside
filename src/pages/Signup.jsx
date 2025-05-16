@@ -16,9 +16,10 @@ export default function Signup() {
     try {
       await handleSignup(formData, navigate);
       await login();
+      alert("회원가입 성공!");
+      navigate("/login");
     } catch (err) {
       console.error(err);
-
       // 개별 필드 에러 메시지 추출
       const data = err.response?.data || {};
       setError({

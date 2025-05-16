@@ -5,17 +5,17 @@ const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true); 
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const data = await checkLoginStatus(); 
+        const data = await checkLoginStatus();
         setUser(data);
       } catch (err) {
         setUser(null);
       } finally {
-        setLoading(false); 
+        setLoading(false);
       }
     };
 

@@ -32,7 +32,7 @@ export default function Login() {
   };
 
   return (
-    <div className="flex flex-col justify-center px-2.5 py-10">
+    <div className="flex flex-col justify-center px-2.5 pt-10 pb-5">
       <div className="self-center w-full">
         <AuthForm
           onSubmit={handleSubmit}

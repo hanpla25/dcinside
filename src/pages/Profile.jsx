@@ -1,16 +1,16 @@
 import ProfileForm from "../ui/profile/ProfileForm";
-import { useAuth } from "../context/AuthContext";
+import Button from "../ui/profile/Button";
+import RequireLogin from "../ui/RequireLogin";
 
 export default function Profile() {
-  const { user } = useAuth();
-
-  if (!user) {
-    return <div className="text-center py-10">로그인이 필요합니다.</div>;
-  }
-
   return (
-    <>
-      <ProfileForm />
-    </>
+    <RequireLogin>
+      <div className="max-w-xl mx-auto">
+        <ProfileForm />
+        <div className="flex justify-end mt-4">
+          <Button />
+        </div>
+      </div>
+    </RequireLogin>
   );
 }
