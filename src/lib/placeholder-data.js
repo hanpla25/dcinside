@@ -4,20 +4,20 @@
 const users = [
   {
     uid: "410544b2-4001-4271-9855-fec4b6a6442a",
-    name: "User1",
-    id: "user1ID",
+    nickname: "User1",
+    userid: "user1ID",
     password: "123456",
   },
   {
     uid: "2d951b28-b85d-4b52-99d3-6bfb62925a0d",
-    name: "User2",
-    id: "user2ID",
+    nickname: "User2",
+    userid: "user2ID",
     password: "123456",
   },
   {
     uid: "8e5f8a6d-fbd7-4a33-8299-61f201f5cc0b",
-    name: "User3",
-    id: "user3ID",
+    nickname: "User3",
+    userid: "user3ID",
     password: "123456",
   },
 ];
@@ -180,7 +180,8 @@ const bestPosts = [
   },
   {
     id: "4f0e3a0b-bc1e-49c3-b2d9-fb332a65a50e",
-    title: "열다섯 번째 실시간 베스트 글열다섯 번째 실시간 베스트 글열다섯 번째 실시간 베스트 글",
+    title:
+      "열다섯 번째 실시간 베스트 글열다섯 번째 실시간 베스트 글열다섯 번째 실시간 베스트 글",
     content: "이것은 열다섯 번째 실시간 베스트 글의 내용입니다.",
     author: "User5",
     date: "2025-05-08T03:00:00",

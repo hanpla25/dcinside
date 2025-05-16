@@ -54,3 +54,27 @@ export const createGallery = async ({ name, url }) => {
     throw err;
   }
 };
+
+export async function updateProfile(formData) {
+  try {
+    const response = await axios.put(
+      "http://localhost:8080/api/member", 
+      {
+        nickname: formData.name,
+        userid: formData.userid,
+        password: formData.password,
+      },
+      {
+        withCredentials: true, 
+      }
+    );
+
+    return response.data;
+  } catch (error) {
+    console.error("프로필 수정 실패:", error);
+    const message =
+      error.response?.data?.message ||
+      "서버 오류로 프로필을 수정할 수 없습니다.";
+    throw new Error(message);
+  }
+}

@@ -5,18 +5,17 @@ const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true); // 초기 로딩 상태
+  const [loading, setLoading] = useState(true); 
 
   useEffect(() => {
-    // 앱이 처음 실행될 때 세션 상태 확인
     const fetchUser = async () => {
       try {
-        const data = await checkLoginStatus(); // 세션 기반 로그인 확인
-        setUser(data); // 로그인된 사용자 정보 저장
+        const data = await checkLoginStatus(); 
+        setUser(data);
       } catch (err) {
         setUser(null);
       } finally {
-        setLoading(false); // 로딩 완료
+        setLoading(false); 
       }
     };
 

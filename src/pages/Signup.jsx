@@ -39,7 +39,7 @@ export default function Signup() {
         buttonLabel={loading ? "가입 중..." : "회원가입"}
         showNickname
         disabled={loading}
-        error={error} // error props 전달
+        error={error} 
       />
     </div>
   );
