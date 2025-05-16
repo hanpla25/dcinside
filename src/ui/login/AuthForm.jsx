@@ -4,6 +4,8 @@ export default function AuthForm({
   onSubmit,
   buttonLabel = "확인",
   showNickname = false,
+  error = null, // 에러 메시지를 props로 받음
+  disabled = false,
 }) {
   const [formData, setFormData] = useState({
     userid: "",
@@ -27,7 +29,7 @@ export default function AuthForm({
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 w-full">
+    <form onSubmit={handleSubmit} className="w-full">
       {showNickname && (
         <input
           type="text"
@@ -35,7 +37,7 @@ export default function AuthForm({
           placeholder="닉네임"
           value={formData.nickname}
           onChange={handleChange}
-          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#3b4890]"
+          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#3b4890] mb-8"
         />
       )}
       <label htmlFor="userid" className="sr-only">
@@ -50,7 +52,9 @@ export default function AuthForm({
         onChange={handleChange}
         className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#3b4890]"
       />
-
+      <div className="text-xs text-red-600 px-2 py-2 min-h-[1.5rem]">
+        {error?.userid || "\u00A0"}
+      </div>
       <label htmlFor="password" className="sr-only">
         비밀번호
       </label>
@@ -63,6 +67,9 @@ export default function AuthForm({
         onChange={handleChange}
         className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#3b4890]"
       />
+      <div className="text-xs text-red-600 px-2 py-2 min-h-[1.5rem]">
+        {error?.password || "\u00A0"}
+      </div>
       <button
         type="submit"
         className="w-full bg-[#3b4890] text-white py-2 rounded-md hover:bg-[#2f3a70] transition"
