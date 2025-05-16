@@ -18,11 +18,9 @@ export default function Login() {
     try {
       await handleLogin(formData, navigate);
       await login();
-    } catch (err) {
-      console.error(err);
-
-      const data = err.response?.data || {};
-
+    } catch (error) {
+      console.error(error);
+      const data = error.response?.data || {};
       setError({
         userid: data.userid || null,
         password: data.password || null,

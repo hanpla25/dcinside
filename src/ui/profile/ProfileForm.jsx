@@ -4,7 +4,6 @@ import { updateProfile } from "../../lib/actions";
 
 export default function ProfileForm() {
   const { user } = useAuth();
-
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -12,6 +11,7 @@ export default function ProfileForm() {
     password: "",
   });
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     if (user) {
@@ -42,21 +42,23 @@ export default function ProfileForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+    setError(null);
     try {
       await updateProfile(formData);
       alert("프로필이 수정되었습니다.");
       setIsEditing(false);
-    } catch (err) {
-      console.error("수정 실패:", err);
-      alert("수정 중 오류가 발생했습니다.");
+    } catch (error) {
+      console.error("수정 실패:", error);
+      const data = error.response?.data || {};
+      setError({
+        userid: data.userid || null,
+        password: data.password || null,
+        message: data.message || null,
+      });
     } finally {
       setLoading(false);
     }
   };
-
-  if (!user) {
-    return <div className="text-center py-10">로그인이 필요합니다.</div>;
-  }
 
   return (
     <form
@@ -74,7 +76,7 @@ export default function ProfileForm() {
         </button>
       </div>
 
-      <div className="space-y-4">
+      <div className="">
         <div>
           <label className="block text-gray-600 text-sm mb-1">이름</label>
           <input
@@ -87,6 +89,9 @@ export default function ProfileForm() {
               isEditing ? "bg-white" : "bg-gray-50 text-gray-500"
             }`}
           />
+          <div className="text-xs text-red-600 px-2 py-2 min-h-[1.5rem]">
+            {error?.message || "\u00A0"}
+          </div>
         </div>
         <div>
           <label className="block text-gray-600 text-sm mb-1">아이디</label>
@@ -97,6 +102,9 @@ export default function ProfileForm() {
             readOnly
             className="w-full px-3 py-2 border rounded bg-gray-50 text-gray-500"
           />
+          <div className="text-xs text-red-600 px-2 py-2 min-h-[1.5rem]">
+            {error?.userid || "\u00A0"}
+          </div>
         </div>
         <div>
           <label className="block text-gray-600 text-sm mb-1">비밀번호</label>
@@ -110,9 +118,11 @@ export default function ProfileForm() {
               isEditing ? "bg-white" : "bg-gray-50 text-gray-500"
             }`}
           />
+          <div className="text-xs text-red-600 px-2 py-2 min-h-[1.5rem]">
+            {error?.password || "\u00A0"}
+          </div>
         </div>
       </div>
-
       {isEditing && (
         <div className="mt-6 text-right">
           <button
