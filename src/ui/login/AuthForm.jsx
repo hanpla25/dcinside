@@ -4,8 +4,7 @@ export default function AuthForm({
   onSubmit,
   buttonLabel = "확인",
   showNickname = false,
-  error = null, // 에러 메시지를 props로 받음
-  disabled = false,
+  error = null,
 }) {
   const [formData, setFormData] = useState({
     userid: "",
@@ -54,6 +53,7 @@ export default function AuthForm({
       />
       <div className="text-xs text-red-600 px-2 py-2 min-h-[1.5rem]">
         {error?.userid || "\u00A0"}
+        {error?.message || "\u00A0"}
       </div>
       <label htmlFor="password" className="sr-only">
         비밀번호
@@ -69,6 +69,7 @@ export default function AuthForm({
       />
       <div className="text-xs text-red-600 px-2 py-2 min-h-[1.5rem]">
         {error?.password || "\u00A0"}
+        {error?.message || "\u00A0"}
       </div>
       <button
         type="submit"

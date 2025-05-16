@@ -15,13 +15,19 @@ export default function Login() {
   const handleSubmit = async (formData) => {
     setLoading(true);
     setError(null);
-
     try {
       await handleLogin(formData, navigate);
       await login();
     } catch (err) {
-      console.log(err);
-      setError("로그인 실패: 아이디 또는 비밀번호를 확인하세요.");
+      console.error(err);
+
+      const data = err.response?.data || {};
+
+      setError({
+        userid: data.userid || null,
+        password: data.password || null,
+        message: data.message || null,
+      });
     } finally {
       setLoading(false);
     }
@@ -34,9 +40,9 @@ export default function Login() {
           onSubmit={handleSubmit}
           buttonLabel={loading ? "로그인 중..." : "로그인"}
           disabled={loading}
+          error={error}
         />
       </div>
-      {error && <div className="text-red-600 mt-2">{error}</div>}
       <Checkbox />
       <Links />
     </div>

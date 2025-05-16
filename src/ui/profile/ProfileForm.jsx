@@ -4,6 +4,7 @@ import { updateProfile } from "../../lib/actions";
 
 export default function ProfileForm() {
   const { user } = useAuth();
+
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -15,9 +16,9 @@ export default function ProfileForm() {
   useEffect(() => {
     if (user) {
       setFormData({
-        name: user.nickname,
-        userid: user.userid,
-        password: user.userpassword,
+        name: user.nickname ?? "",
+        userid: user.userid ?? "",
+        password: user.userpassword ?? "",
       });
     }
   }, [user]);
@@ -30,9 +31,9 @@ export default function ProfileForm() {
   const handleToggleEdit = () => {
     if (isEditing && user) {
       setFormData({
-        name: user.nickname,
-        userid: user.userid,
-        password: user.userpassword,
+        name: user.nickname ?? "",
+        userid: user.userid ?? "",
+        password: user.userpassword ?? "",
       });
     }
     setIsEditing((prev) => !prev);
@@ -79,7 +80,7 @@ export default function ProfileForm() {
           <input
             type="text"
             name="name"
-            value={formData.name}
+            value={formData.name || ""}
             onChange={handleChange}
             readOnly={!isEditing}
             className={`w-full px-3 py-2 border rounded ${
@@ -92,8 +93,8 @@ export default function ProfileForm() {
           <input
             type="text"
             name="userid"
-            value={formData.userid}
-            readOnly 
+            value={formData.userid || ""}
+            readOnly
             className="w-full px-3 py-2 border rounded bg-gray-50 text-gray-500"
           />
         </div>
@@ -102,7 +103,7 @@ export default function ProfileForm() {
           <input
             type="password"
             name="password"
-            value={formData.password}
+            value={formData.password || ""}
             onChange={handleChange}
             readOnly={!isEditing}
             className={`w-full px-3 py-2 border rounded ${

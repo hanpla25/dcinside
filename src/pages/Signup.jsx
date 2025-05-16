@@ -7,7 +7,6 @@ import { useState } from "react";
 export default function Signup() {
   const navigate = useNavigate();
   const { login } = useAuth();
-
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -26,6 +25,7 @@ export default function Signup() {
         userid: data.userid || null,
         password: data.password || null,
         nickname: data.nickname || null,
+        message: data.message || null,
       });
     } finally {
       setLoading(false);
@@ -39,7 +39,7 @@ export default function Signup() {
         buttonLabel={loading ? "가입 중..." : "회원가입"}
         showNickname
         disabled={loading}
-        error={error} 
+        error={error}
       />
     </div>
   );
