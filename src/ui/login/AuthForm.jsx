@@ -6,7 +6,7 @@ export default function AuthForm({
   showNickname = false,
 }) {
   const [formData, setFormData] = useState({
-    username: "",
+    userid: "",
     password: "",
     nickname: "",
   });
@@ -38,15 +38,24 @@ export default function AuthForm({
           className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#3b4890]"
         />
       )}
+      <label htmlFor="userid" className="sr-only">
+        아이디
+      </label>
       <input
+        id="userid"
         type="text"
-        name="username"
+        name="userid"
         placeholder="아이디"
-        value={formData.username}
+        value={formData.userid}
         onChange={handleChange}
         className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#3b4890]"
       />
+
+      <label htmlFor="password" className="sr-only">
+        비밀번호
+      </label>
       <input
+        id="password"
         type="password"
         name="password"
         placeholder="비밀번호"

@@ -13,7 +13,7 @@ export default function ProfileForm() {
       <div className="space-y-4">
         <div>
           <label className="block text-gray-600 text-sm mb-1">이름</label>
-          <div className="border px-3 py-2 rounded bg-gray-50">{user.name}</div>
+          <div className="border px-3 py-2 rounded bg-gray-50">{user.nickname}</div>
         </div>
         <div>
           <label className="block text-gray-600 text-sm mb-1">아이디</label>

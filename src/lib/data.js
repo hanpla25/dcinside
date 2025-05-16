@@ -7,7 +7,7 @@ import {
 
 export const fetchBestPosts = async () => {
   try {
-    const res = await axios.get("http://localhost:8080/api/main/best");
+    const res = await axios.get("http://localhost:8080/api/post/best");
     return res.data;
   } catch (err) {
     console.error("실시간 베스트 요청 실패, placeholder 사용:", err);
@@ -17,7 +17,7 @@ export const fetchBestPosts = async () => {
 
 export const fetchGalleryList = async () => {
   try {
-    const res = await axios.get("http://localhost:8080/api/main/galleries");
+    const res = await axios.get("http://localhost:8080/api/category");
     return res.data;
   } catch (err) {
     console.error("갤러리 리스트 요청 실패, placeholder 사용:", err);

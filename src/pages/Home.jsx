@@ -7,10 +7,18 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchBestPosts()
-      .then(setBestPosts)
-      .catch((err) => console.error("실시간 베스트 실패:", err))
-      .finally(() => setLoading(false));
+    const loadBestPosts = async () => {
+      try {
+        const data = await fetchBestPosts();
+        setBestPosts(data);
+      } catch (err) {
+        console.error("실시간 베스트 실패:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadBestPosts();
   }, []);
 
   if (loading) return <div className="text-center py-10">로딩 중...</div>;

@@ -1,12 +1,18 @@
 import AuthForm from "../ui/login/AuthForm";
 import { handleSignup } from "../lib/actions";
 import { useNavigate } from "react-router";
+import { useAuth } from "../context/AuthContext";
 
 export default function Signup() {
   const navigate = useNavigate();
 
-  const handleSubmit = (formData) => {
-    handleSignup(formData, navigate);
+  const { login } = useAuth();
+
+  const handleSubmit = async (formData) => {
+    try {
+      await handleSignup(formData, navigate);
+      await login();
+    } catch (error) {}
   };
 
   return (

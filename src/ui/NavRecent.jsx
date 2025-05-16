@@ -1,15 +1,12 @@
 import { useState } from "react";
 import { recentList, favoriteList } from "../lib/placeholder-data";
+import { createTouchSwipeHandlers } from "../lib/utils";
 
 export default function NavRecent({ onClose }) {
   const [tab, setTab] = useState("recent");
   const [page, setPage] = useState(0);
-  const [isTouching, setIsTouching] = useState(false);
-  const [startX, setStartX] = useState(0);
-  const [dragOffset, setDragOffset] = useState(0);
 
   const itemsPerPage = 8;
-
   const fullList = tab === "recent" ? recentList : favoriteList;
   const totalPages = Math.ceil(fullList.length / itemsPerPage);
   const pagedList = fullList.slice(
@@ -17,36 +14,15 @@ export default function NavRecent({ onClose }) {
     (page + 1) * itemsPerPage
   );
 
-  // 터치 이벤트 핸들러
-  const handleTouchStart = (e) => {
-    setIsTouching(true);
-    setStartX(e.touches[0].clientX);
-  };
-
-  const handleTouchMove = (e) => {
-    if (!isTouching) return;
-    setDragOffset(e.touches[0].clientX - startX);
-  };
-
-  const handleTouchEnd = () => {
-    if (isTouching) {
-      const direction = dragOffset > 50 ? -1 : dragOffset < -50 ? 1 : 0;
-      if (direction !== 0) {
-        setPage((prevPage) =>
-          Math.min(Math.max(prevPage + direction, 0), totalPages - 1)
-        );
-      }
-      setIsTouching(false);
-      setDragOffset(0);
-    }
-  };
+  const touchHandlers = createTouchSwipeHandlers({
+    onSwipeLeft: () => setPage((prev) => Math.min(prev + 1, totalPages - 1)),
+    onSwipeRight: () => setPage((prev) => Math.max(prev - 1, 0)),
+  });
 
   return (
     <div
       className="w-full bg-white border-t border-gray-200"
-      onTouchStart={handleTouchStart}
-      onTouchMove={handleTouchMove}
-      onTouchEnd={handleTouchEnd}
+      {...touchHandlers}
     >
       {/* 탭 */}
       <div className="flex bg-[#f1f4f8]">
@@ -106,7 +82,6 @@ export default function NavRecent({ onClose }) {
 
       {/* 페이지 동그라미 + 닫기 버튼 */}
       <div className="flex justify-between items-center py-3 px-2">
-        {/* 페이지 동그라미 버튼 */}
         <div className="flex gap-2">
           {Array.from({ length: totalPages }).map((_, idx) => (
             <button
@@ -117,8 +92,6 @@ export default function NavRecent({ onClose }) {
             />
           ))}
         </div>
-
-        {/* 닫기 버튼 */}
         <button onClick={onClose} className="text-gray-500 hover:text-black">
           닫기
         </button>

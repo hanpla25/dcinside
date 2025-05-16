@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect } from "react";
-import { checkLoginStatus } from "../lib/api"; // 세션 검증 함수
+import { checkLoginStatus } from "../lib/actions";
 
 const AuthContext = createContext();
 
@@ -24,7 +24,7 @@ export function AuthProvider({ children }) {
   }, []);
 
   const login = async () => {
-    const data = await checkLoginStatus(); // 로그인 성공 후 세션 확인
+    const data = await checkLoginStatus();
     setUser(data);
   };
 

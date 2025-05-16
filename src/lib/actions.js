@@ -10,24 +10,41 @@ export const handleSignup = async (data, navigate) => {
     navigate("/");
   } catch (err) {
     console.error("회원가입 실패:", err);
-    navigate("/");
+    throw err;
   }
 };
 
 export const handleLogin = async (data, navigate) => {
   try {
-    const res = await axios.post("http://localhost:8080/api/login", data);
+    const res = await axios.post(
+      "http://localhost:8080/api/member/login",
+      data,
+      { withCredentials: true }
+    );
     console.log("로그인 성공:", res.data);
     navigate("/");
+    return res.data;
   } catch (err) {
     console.error("로그인 실패:", err);
-    navigate("/");
+    throw err;
+  }
+};
+
+export const checkLoginStatus = async () => {
+  try {
+    const res = await axios.get("http://localhost:8080/api/member", {
+      withCredentials: true,
+    });
+    return res.data;
+  } catch (err) {
+    console.error("로그인 상태 확인 실패:", err);
+    return null;
   }
 };
 
 export const createGallery = async ({ name, url }) => {
   try {
-    const res = await axios.post("http://localhost:8080/api/gallery", {
+    const res = await axios.post("http://localhost:8080/api/category", {
       name,
       url,
     });
