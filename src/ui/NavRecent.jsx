@@ -19,6 +19,11 @@ export default function NavRecent({ onClose }) {
     onSwipeRight: () => setPage((prev) => Math.max(prev - 1, 0)),
   });
 
+  const handleTabChange = (type) => {
+    setTab(type);
+    setPage(0);
+  };
+
   return (
     <div
       className="w-full bg-white border-t border-gray-200"
@@ -26,66 +31,59 @@ export default function NavRecent({ onClose }) {
     >
       {/* 탭 */}
       <div className="flex bg-[#f1f4f8]">
-        <button
-          onClick={() => {
-            setTab("recent");
-            setPage(0);
-          }}
-          className={`w-1/2 py-2 text-sm font-semibold border-b-2 ${
-            tab === "recent"
-              ? "border-[#29367c] text-[#29367c]"
-              : "border-transparent text-[#555555]"
-          }`}
-        >
-          최근방문
-        </button>
-        <button
-          onClick={() => {
-            setTab("favorite");
-            setPage(0);
-          }}
-          className={`w-1/2 py-2 text-sm font-semibold border-b-2 ${
-            tab === "favorite"
-              ? "border-[#29367c] text-[#29367c]"
-              : "border-transparent text-[#555555]"
-          }`}
-        >
-          즐겨찾기
-        </button>
-      </div>
-
-      {/* 갤러리 목록 */}
-      <div className="grid grid-cols-2 text-sm text-gray-700">
-        {[
-          ...pagedList,
-          ...Array(itemsPerPage - pagedList.length).fill(null),
-        ].map((name, idx) => (
-          <div
-            key={idx}
-            className="flex items-center justify-between pl-4 pr-2 py-2 border-b border-gray-300"
+        {["recent", "favorite"].map((type) => (
+          <button
+            key={type}
+            onClick={() => handleTabChange(type)}
+            className={`w-1/2 py-2 text-sm font-semibold border-b-2 ${
+              tab === type
+                ? "border-[#29367c] text-[#29367c]"
+                : "border-transparent text-[#555555]"
+            }`}
           >
-            {name ? (
-              <>
-                <span className="truncate">{name}</span>
-                <img
-                  src="/x_button.png"
-                  alt="삭제"
-                  className="w-4 h-4 opacity-70"
-                />
-              </>
-            ) : (
-              <span>&nbsp;</span>
-            )}
-          </div>
+            {type === "recent" ? "최근방문" : "즐겨찾기"}
+          </button>
         ))}
       </div>
 
-      {/* 페이지 동그라미 + 닫기 버튼 */}
+      {/* 목록 */}
+      <div className="grid grid-cols-2 text-sm text-gray-700">
+        {Array.from({ length: itemsPerPage }).map((_, idx) => {
+          const name = pagedList[idx];
+          return (
+            <div
+              key={idx}
+              className="flex items-center justify-between pl-4 pr-2 py-2 border-b border-gray-300"
+            >
+              {name ? (
+                <>
+                  <span className="truncate">{name}</span>
+                  <img
+                    src="/x_button.png"
+                    alt="삭제"
+                    className="w-4 h-4 opacity-70 cursor-pointer"
+                    onClick={() => {
+                      // TODO: 삭제 로직 구현
+                      console.log("삭제 클릭:", name);
+                    }}
+                  />
+                </>
+              ) : (
+                <span>&nbsp;</span>
+              )}
+            </div>
+          );
+        })}
+      </div>
+
+      {/* 페이지네이션 & 닫기 버튼 */}
       <div className="flex justify-between items-center py-3 px-2">
         <div className="flex gap-2">
           {Array.from({ length: totalPages }).map((_, idx) => (
             <button
               key={idx}
+              onClick={() => setPage(idx)}
+              aria-label={`페이지 ${idx + 1}`}
               className={`w-3 h-3 rounded-full ${
                 page === idx ? "bg-blue-600" : "bg-gray-200"
               }`}

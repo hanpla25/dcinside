@@ -16,6 +16,7 @@ export default function Login() {
     setError(null);
     try {
       await login(formData);
+      navigate("/");
     } catch (error) {
       console.error(error);
       const data = error.response?.data || {};
@@ -26,7 +27,6 @@ export default function Login() {
       });
     } finally {
       setLoading(false);
-      navigate("/");
     }
   };
 

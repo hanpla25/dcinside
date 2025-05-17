@@ -11,17 +11,20 @@ export default function ProfileForm() {
     password: "",
   });
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState({});
 
   useEffect(() => {
-    if (user) {
-      setFormData({
-        name: user.nickname ?? "",
-        userid: user.userid ?? "",
-        password: user.userpassword ?? "",
-      });
-    }
+    if (user) resetForm();
   }, [user]);
+
+  const resetForm = () => {
+    setFormData({
+      name: user?.nickname ?? "",
+      userid: user?.userid ?? "",
+      password: user?.userpassword ?? "",
+    });
+    setError({});
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -29,20 +32,14 @@ export default function ProfileForm() {
   };
 
   const handleToggleEdit = () => {
-    if (isEditing && user) {
-      setFormData({
-        name: user.nickname ?? "",
-        userid: user.userid ?? "",
-        password: user.userpassword ?? "",
-      });
-    }
+    if (isEditing) resetForm();
     setIsEditing((prev) => !prev);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setError(null);
+    setError({});
     try {
       await updateProfile(formData);
       alert("프로필이 수정되었습니다.");
@@ -60,6 +57,34 @@ export default function ProfileForm() {
     }
   };
 
+  const inputClass = (editable) =>
+    `w-full px-3 py-2 border rounded ${
+      editable ? "bg-white" : "bg-gray-50 text-gray-500"
+    }`;
+
+  const renderInput = (
+    label,
+    name,
+    type = "text",
+    readOnly = false,
+    errorMsg = ""
+  ) => (
+    <div>
+      <label className="block text-gray-600 text-sm mb-1">{label}</label>
+      <input
+        type={type}
+        name={name}
+        value={formData[name] || ""}
+        onChange={handleChange}
+        readOnly={readOnly}
+        className={inputClass(!readOnly)}
+      />
+      <div className="text-xs text-red-600 px-2 py-2 min-h-[1.5rem]">
+        {errorMsg || "\u00A0"}
+      </div>
+    </div>
+  );
+
   return (
     <form
       onSubmit={handleSubmit}
@@ -76,53 +101,18 @@ export default function ProfileForm() {
         </button>
       </div>
 
-      <div className="">
-        <div>
-          <label className="block text-gray-600 text-sm mb-1">이름</label>
-          <input
-            type="text"
-            name="name"
-            value={formData.name || ""}
-            onChange={handleChange}
-            readOnly={!isEditing}
-            className={`w-full px-3 py-2 border rounded ${
-              isEditing ? "bg-white" : "bg-gray-50 text-gray-500"
-            }`}
-          />
-          <div className="text-xs text-red-600 px-2 py-2 min-h-[1.5rem]">
-            {error?.message || "\u00A0"}
-          </div>
-        </div>
-        <div>
-          <label className="block text-gray-600 text-sm mb-1">아이디</label>
-          <input
-            type="text"
-            name="userid"
-            value={formData.userid || ""}
-            readOnly
-            className="w-full px-3 py-2 border rounded bg-gray-50 text-gray-500"
-          />
-          <div className="text-xs text-red-600 px-2 py-2 min-h-[1.5rem]">
-            {error?.userid || "\u00A0"}
-          </div>
-        </div>
-        <div>
-          <label className="block text-gray-600 text-sm mb-1">비밀번호</label>
-          <input
-            type="password"
-            name="password"
-            value={formData.password || ""}
-            onChange={handleChange}
-            readOnly={!isEditing}
-            className={`w-full px-3 py-2 border rounded ${
-              isEditing ? "bg-white" : "bg-gray-50 text-gray-500"
-            }`}
-          />
-          <div className="text-xs text-red-600 px-2 py-2 min-h-[1.5rem]">
-            {error?.password || "\u00A0"}
-          </div>
-        </div>
+      <div>
+        {renderInput("이름", "name", "text", !isEditing, error?.message)}
+        {renderInput("아이디", "userid", "text", true, error?.userid)}
+        {renderInput(
+          "비밀번호",
+          "password",
+          "password",
+          !isEditing,
+          error?.password
+        )}
       </div>
+
       {isEditing && (
         <div className="mt-6 text-right">
           <button
