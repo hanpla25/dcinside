@@ -2,14 +2,20 @@ import AuthForm from "../ui/login/AuthForm";
 import Checkbox from "../ui/login/Checkbox";
 import Links from "../ui/login/Links";
 import { useAuth } from "../context/AuthContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 
 export default function Login() {
-  const { login } = useAuth();
+  const { login, isLogin } = useAuth();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isLogin) {
+      navigate("/");
+    }
+  }, [isLogin, navigate]);
 
   const handleSubmit = async (formData) => {
     setLoading(true);

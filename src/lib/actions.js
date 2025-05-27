@@ -15,13 +15,18 @@ export const handleLogin = async (data) => {
   return res.data;
 };
 
+export const handleLogout = async () => {
+  const res = await apiClient.post("/member/logout");
+  return res.data;
+};
+
 export const resign = async () => {
   const res = await apiClient.delete("/member");
   return res.data;
 };
 
-export const createGallery = async ({ name, abbreviation }) => {
-  const res = await apiClient.post("/category", { name, abbreviation });
+export const createGallery = async ({ name, abbr }) => {
+  const res = await apiClient.post("/category", { name, abbr });
   return res.data;
 };
 
@@ -31,5 +36,10 @@ export const updateProfile = async (formData) => {
     userid: formData.userid,
     password: formData.password,
   });
+  return res.data;
+};
+
+export const handlePost = async (data) => {
+  const res = await apiClient.post("/post", data);
   return res.data;
 };

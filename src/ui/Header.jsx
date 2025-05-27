@@ -10,37 +10,50 @@ export default function Header() {
 
   return (
     <>
-      <header className="bg-[#29367c] flex items-center justify-between px-2 py-2.5">
-        {/* 왼쪽 로고 */}
-        <Link to="/">
-          <img src="/left_logo.png" alt="로고" className="mr-1" />
+      <header className="flex items-center bg-[#29367c] py-2 px-2">
+        <Link to="/" className="flex items-center">
+          <img
+            src="/left_logo.png"
+            alt="로고"
+            className=""
+            width={34}
+            height={26}
+          />
         </Link>
 
-        {/* 검색창 및 버튼들 */}
-        <div className="flex flex-1 bg-white items-center border border-gray-200 rounded">
-          <div className="px-2 border-gray-200">
-            <img src="/header_btn.png" alt="메뉴 버튼" />
+        <form className="flex flex-1 items-center justify-between bg-white ml-2 py-1.5">
+          <div className="px-2 flex items-center h-full">
+            <img
+              src="/header_btn.png"
+              alt="메뉴 버튼"
+              className=""
+              width={20}
+              height={16}
+            />
           </div>
-
           <input
             type="text"
             placeholder="갤러리 & 통합검색"
             aria-label="갤러리 및 통합검색"
-            className="flex-1 px-2 py-1 font-light border-l border-gray-200 focus:outline-none"
+            className="flex-1 w-full px-2 py-1 text-sm border-x border-gray-200 focus:outline-none"
           />
-
-          <div className="px-2 border-r border-gray-200">
-            <img src="/header_search.png" alt="검색" />
+          <div className="px-2 flex items-center h-full">
+            <img
+              src="/header_search.png"
+              alt="검색"
+              className=""
+              width={20}
+              height={22}
+            />
           </div>
-
           <button
             type="button"
             onClick={toggleRecent}
-            className="px-2 text-sm font-medium"
+            className="h-full text-sm px-1.5"
           >
             최근 방문
           </button>
-        </div>
+        </form>
       </header>
 
       {showRecent && (

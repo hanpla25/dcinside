@@ -4,7 +4,7 @@ import { resign } from "../../lib/actions";
 
 export default function Button() {
   const navigate = useNavigate();
-  const { logout } = useAuth;
+  const { logout } = useAuth();
 
   const handleDelete = async () => {
     if (!window.confirm("정말로 탈퇴하시겠습니까?")) return;

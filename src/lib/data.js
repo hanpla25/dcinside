@@ -1,8 +1,17 @@
 import { apiClient } from "./actions";
 
-export const fetchBestPosts = async () => {
-  const res = await apiClient.get("/post/best");
+export const fetchUser = async () => {
+  const res = await apiClient.get("/member");
   return res.data;
+};
+
+export const fetchBestPosts = async () => {
+  const page = 1;
+  const like_cut = 10;
+  const res = await apiClient.get("/post", {
+    params: { page, like_cut },
+  });
+  return res.data.posts;
 };
 
 export const fetchGalleryList = async () => {
@@ -10,7 +19,10 @@ export const fetchGalleryList = async () => {
   return res.data;
 };
 
-export const checkLoginStatus = async () => {
-  const res = await apiClient.get("/member");
+export const fetchPostList = async () => {
+  const page = 1;
+  const res = await apiClient.get("/post", {
+    params: { page },
+  });
   return res.data;
 };

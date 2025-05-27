@@ -7,7 +7,7 @@ export default function GalleryList() {
   if (loading) return <div className="text-center py-4">로딩 중...</div>;
 
   return (
-    <div>
+    <div className="min-h-[82.2vh]">
       <div className="flex justify-between text-xl font-semibold p-2 border-b border-gray-300">
         <span>전체 갤러리</span>
         <Link to="/create">
@@ -20,7 +20,7 @@ export default function GalleryList() {
         {galleryList.map((gall, idx) => (
           <Link
             key={gall.id + idx}
-            to={`/gallery${gall.url}`}
+            to={`/gallery/${gall.abbr}`}
             className={`p-3 hover:bg-gray-50 border-b border-gray-300 ${
               idx % 2 === 0 ? "border-r border-gray-300" : ""
             }`}

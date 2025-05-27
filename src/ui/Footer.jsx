@@ -3,7 +3,6 @@ import { useAuth } from "../context/AuthContext";
 
 export default function Footer() {
   const { isLogin, logout } = useAuth();
-
   return (
     <footer className="bg-[#3b4890] flex justify-center py-4">
       {isLogin ? (

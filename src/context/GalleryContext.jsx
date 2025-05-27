@@ -12,8 +12,8 @@ export function GalleryProvider({ children }) {
     try {
       const data = await fetchGalleryList();
       setGalleryList(data);
-    } catch (err) {
-      console.error("갤러리 로딩 실패", err);
+    } catch (error) {
+      console.error("갤러리 로딩 실패", error);
     } finally {
       setLoading(false);
     }

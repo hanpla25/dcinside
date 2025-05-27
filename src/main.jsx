@@ -12,6 +12,8 @@ import Create from "./pages/Create";
 import { GalleryProvider } from "./context/GalleryContext";
 import { AuthProvider } from "./context/AuthContext";
 import Profile from "./pages/Profile";
+import Gallery from "./pages/Gallery";
+import Writer from "./pages/Writer";
 
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
@@ -26,6 +28,8 @@ createRoot(document.getElementById("root")).render(
           <Route path="/profile" element={<Profile />} />
           <Route path="/category" element={<Category />} />
           <Route path="/create" element={<Create />} />
+          <Route path="/gallery/:category" element={<Gallery />} />
+          <Route path="/writer/:category" element={<Writer />} />
         </Routes>
         <Footer />
       </GalleryProvider>

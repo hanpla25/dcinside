@@ -6,14 +6,14 @@ import { useGallery } from "../../context/GalleryContext";
 
 export default function CreateGalleryForm() {
   const [baseName, setBaseName] = useState("");
-  const [abbreviation, setAbbreviation] = useState("");
+  const [abbr, setabbr] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const navigate = useNavigate();
   const { refetchGalleryList } = useGallery();
 
   const resetForm = () => {
     setBaseName("");
-    setAbbreviation("");
+    setabbr("");
   };
 
   const formatName = (name) => `${name.trim()} 갤러리`;
@@ -24,7 +24,7 @@ export default function CreateGalleryForm() {
     const name = formatName(baseName);
 
     try {
-      await createGallery({ name, abbreviation });
+      await createGallery({ name, abbr });
       await refetchGalleryList();
       console.log("갤러리 생성 성공");
       alert("갤러리 신청이 완료되었습니다!");
@@ -65,8 +65,8 @@ export default function CreateGalleryForm() {
             type="text"
             className={inputStyle}
             placeholder="예: food"
-            value={abbreviation}
-            onChange={(e) => setAbbreviation(e.target.value)}
+            value={abbr}
+            onChange={(e) => setabbr(e.target.value)}
             required
           />
           <p className="text-sm text-gray-500 mt-1">

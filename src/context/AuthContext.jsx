@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect } from "react";
-import { handleSignup, handleLogin } from "../lib/actions";
-import { checkLoginStatus } from "../lib/data";
+import { handleSignup, handleLogin, handleLogout } from "../lib/actions";
+import { fetchUser as apiFetchUser } from "../lib/data";
 
 const AuthContext = createContext();
 
@@ -9,9 +9,9 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchUser = async () => {
+    const loadUser = async () => {
       try {
-        const data = await checkLoginStatus();
+        const data = await apiFetchUser();
         setUser(data);
       } catch (error) {
         setUser(null);
@@ -19,14 +19,13 @@ export function AuthProvider({ children }) {
         setLoading(false);
       }
     };
-
-    fetchUser();
+    loadUser();
   }, []);
 
   const login = async (loginData) => {
     try {
       await handleLogin(loginData);
-      const data = await checkLoginStatus();
+      const data = await apiFetchUser();
       setUser(data);
     } catch (error) {
       throw error;
@@ -43,7 +42,7 @@ export function AuthProvider({ children }) {
 
   const logout = async () => {
     try {
-      await fetch("/api/logout", { method: "POST", credentials: "include" });
+      await handleLogout();
       setUser(null);
     } catch (error) {
       console.error("로그아웃 실패:", error);
