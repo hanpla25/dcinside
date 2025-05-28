@@ -1,5 +1,7 @@
 export default function Pagination({ page, totalCount, setSearchParams }) {
   const totalPages = Math.ceil(totalCount / 10);
+  if (page < 1 || page > totalPages) return null;
+
   const groupSize = 5;
   const currentGroup = Math.floor((page - 1) / groupSize);
   const startPage = currentGroup * groupSize + 1;
@@ -18,7 +20,7 @@ export default function Pagination({ page, totalCount, setSearchParams }) {
       {startPage > 1 && (
         <button
           onClick={() => handlePageClick(startPage - groupSize)}
-          className="px-2 py-1 border rounded"
+          className=""
         >
           &lt;
         </button>
@@ -31,10 +33,8 @@ export default function Pagination({ page, totalCount, setSearchParams }) {
         <button
           key={p}
           onClick={() => handlePageClick(p)}
-          className={`px-3 py-1 border rounded ${
-            p === page
-              ? "bg-blue-500 text-white font-bold"
-              : "bg-white text-gray-800"
+          className={`px-3 py-1 ${
+            p === page ? "text-[#3b4890] font-bold" : " "
           }`}
         >
           {p}
@@ -44,7 +44,7 @@ export default function Pagination({ page, totalCount, setSearchParams }) {
       {endPage < totalPages && (
         <button
           onClick={() => handlePageClick(startPage + groupSize)}
-          className="px-2 py-1 border rounded"
+          className=""
         >
           &gt;
         </button>

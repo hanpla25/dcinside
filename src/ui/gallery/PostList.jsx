@@ -6,7 +6,7 @@ export default function PostList({ posts, loading, error }) {
   if (loading) return <div>로딩 중...</div>;
   if (error) return <div>{error}</div>;
   if (posts.length === 0)
-    return <div className="py-60 text-center">게시글이 없습니다.</div>;
+    return <div className="py-60 text-center">등록된 게시글이 없습니다.</div>;
   
   return (
     <ul className="min-h-[60vh]">
