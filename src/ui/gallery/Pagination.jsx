@@ -1,5 +1,6 @@
 export default function Pagination({ page, totalCount, setSearchParams }) {
-  const totalPages = Math.ceil(totalCount / 10);
+  const numberPerPage = 20;
+  const totalPages = Math.ceil(totalCount / numberPerPage);
   if (page < 1 || page > totalPages) return null;
 
   const groupSize = 5;
