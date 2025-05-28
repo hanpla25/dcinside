@@ -9,6 +9,7 @@ export default function ProfileForm() {
     name: "",
     userid: "",
     password: "",
+    nextpassword: "",
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState({});
@@ -21,7 +22,8 @@ export default function ProfileForm() {
     setFormData({
       name: user?.nickname ?? "",
       userid: user?.userid ?? "",
-      password: user?.userpassword ?? "",
+      password: "",
+      nextpassword: "",
     });
     setError({});
   };
@@ -49,8 +51,9 @@ export default function ProfileForm() {
       const data = error.response?.data || {};
       setError({
         userid: data.userid || null,
-        password: data.password || null,
         message: data.message || null,
+        prevpassword: data.password || null,
+        nextpassword: data.password || null,
       });
     } finally {
       setLoading(false);
@@ -78,6 +81,7 @@ export default function ProfileForm() {
         onChange={handleChange}
         readOnly={readOnly}
         className={inputClass(!readOnly)}
+        autoComplete="off"
       />
       <div className="text-xs text-red-600 px-2 py-2 min-h-[1.5rem]">
         {errorMsg || "\u00A0"}
@@ -102,15 +106,24 @@ export default function ProfileForm() {
       </div>
 
       <div>
-        {renderInput("이름", "name", "text", !isEditing, error?.message)}
         {renderInput("아이디", "userid", "text", true, error?.userid)}
-        {renderInput(
-          "비밀번호",
-          "password",
-          "password",
-          !isEditing,
-          error?.password
-        )}
+        {renderInput("이름", "name", "text", !isEditing, error?.message)}
+        {isEditing &&
+          renderInput(
+            "이전 비밀번호",
+            "password",
+            "password",
+            false,
+            error?.prevpassword
+          )}
+        {isEditing &&
+          renderInput(
+            "새로운 비밀번호",
+            "nextpassword",
+            "nextpassword",
+            false,
+            error?.nextpassword
+          )}
       </div>
 
       {isEditing && (

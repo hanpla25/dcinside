@@ -32,9 +32,10 @@ export const createGallery = async ({ name, abbr }) => {
 
 export const updateProfile = async (formData) => {
   const res = await apiClient.put("/member", {
-    nickname: formData.name,
     userid: formData.userid,
     password: formData.password,
+    nickname: formData.name,
+    newPassword: formData.password,
   });
   return res.data;
 };
