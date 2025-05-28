@@ -22,6 +22,8 @@ export default function Gallery() {
   const like_cut = searchParams.get("recomend") === "1" ? 10 : 0;
   const search = searchParams.get("search") || "";
   const page = parseInt(searchParams.get("page") || "1", 10);
+  const size = parseInt(searchParams.get("size") || "20", 10);
+  const sizes = [1, 20, 30, 50];
 
   useEffect(() => {
     if (galleryLoading) return;
@@ -42,6 +44,7 @@ export default function Gallery() {
           page,
           like_cut,
           search,
+          size,
         });
         setPosts(data.posts);
         setTotalCount(data.totalCount);
@@ -53,17 +56,18 @@ export default function Gallery() {
     };
 
     loadPosts();
-  }, [category, like_cut, search, page]);
+  }, [category, like_cut, search, page, size]);
 
   return (
     <div>
       <GalleryHeader category={category} galleryName={galleryName} />
-      <Tap setSearchParams={setSearchParams} />
+      <Tap setSearchParams={setSearchParams} size={size} sizes={sizes} />
       <PostList posts={posts} loading={loading} error={error} />
       <Pagination
         page={page}
         totalCount={totalCount}
         setSearchParams={setSearchParams}
+        size={size}
       />
       <SearchInput search={search} setSearchParams={setSearchParams} />
     </div>
