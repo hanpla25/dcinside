@@ -9,7 +9,7 @@ export default function PostList({ posts, loading, error }) {
     return <div className="py-60 text-center">게시글이 없습니다.</div>;
   
   return (
-    <ul className="min-h-[50vh]">
+    <ul className="min-h-[60vh]">
       {posts.map((post) => (
         <Link key={post.id} to={`/${post.id}`}>
           <li className="p-2 border-b border-b-gray-400">
