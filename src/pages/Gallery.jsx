@@ -24,7 +24,7 @@ export default function Gallery() {
   const sizes = [1, 20, 30, 50];
   const currentPage = parseInt(searchParams.get("page") || "1", 10);
   const size = parseInt(searchParams.get("size") || "20", 10);
-  const totalPages = 16;
+  const totalPages = Math.ceil(totalCount / size);
 
   // 갤러리
   const galleryName = galleryList.find((item) => item.abbr === category)?.name;
