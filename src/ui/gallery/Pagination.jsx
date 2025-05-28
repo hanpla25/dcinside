@@ -1,13 +1,11 @@
 export default function Pagination({
-  page,
-  totalCount,
+  currentPage,
   setSearchParams,
-  size,
+  totalPages,
 }) {
-  const totalPages = Math.ceil(totalCount / size);
-  if (page < 1 || page > totalPages) return null;
+  if (currentPage < 1 || currentPage > totalPages) return null;
   const groupSize = 5;
-  const currentGroup = Math.floor((page - 1) / groupSize);
+  const currentGroup = Math.floor((currentPage - 1) / groupSize);
   const startPage = currentGroup * groupSize + 1;
   const endPage = Math.min(startPage + groupSize - 1, totalPages);
 
@@ -38,7 +36,7 @@ export default function Pagination({
           key={p}
           onClick={() => handlePageClick(p)}
           className={`px-3 py-1 ${
-            p === page ? "text-[#3b4890] font-bold" : " "
+            p === currentPage ? "text-[#3b4890] font-bold" : " "
           }`}
         >
           {p}

@@ -5,15 +5,17 @@ import Button from "./Button";
 import { useGallery } from "../../context/GalleryContext";
 
 export default function CreateGalleryForm() {
-  const [baseName, setBaseName] = useState("");
-  const [abbr, setabbr] = useState("");
-  const [submitting, setSubmitting] = useState(false);
   const navigate = useNavigate();
   const { refetchGalleryList } = useGallery();
 
+  // state
+  const [baseName, setBaseName] = useState("");
+  const [abbr, setAbbr] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+
   const resetForm = () => {
     setBaseName("");
-    setabbr("");
+    setAbbr("");
   };
 
   const formatName = (name) => `${name.trim()} 갤러리`;
@@ -32,7 +34,7 @@ export default function CreateGalleryForm() {
       navigate("/category");
     } catch (error) {
       console.error("갤러리 생성 실패", error);
-      alert("갤러리 신청에 실패했습니다.");
+      alert(data?.message || "갤러리 신청에 실패했습니다.");
     } finally {
       setSubmitting(false);
     }
@@ -66,7 +68,7 @@ export default function CreateGalleryForm() {
             className={inputStyle}
             placeholder="예: food"
             value={abbr}
-            onChange={(e) => setabbr(e.target.value)}
+            onChange={(e) => setAbbr(e.target.value.toLowerCase())}
             required
           />
           <p className="text-sm text-gray-500 mt-1">

@@ -1,9 +1,13 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { updateProfile } from "../../lib/actions";
+import { useNavigate } from "react-router";
 
 export default function ProfileForm() {
+  const navigate = useNavigate();
   const { user } = useAuth();
+
+  // state
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -53,13 +57,15 @@ export default function ProfileForm() {
         userid: data.userid || null,
         message: data.message || null,
         prevpassword: data.password || null,
-        nextpassword: data.password || null,
+        nextpassword: data.newPassword || null,
       });
     } finally {
       setLoading(false);
+      navigate("/");
     }
   };
 
+  // 스타일 통합
   const inputClass = (editable) =>
     `w-full px-3 py-2 border rounded ${
       editable ? "bg-white" : "bg-gray-50 text-gray-500"
@@ -120,7 +126,7 @@ export default function ProfileForm() {
           renderInput(
             "새로운 비밀번호",
             "nextpassword",
-            "nextpassword",
+            "password",
             false,
             error?.nextpassword
           )}

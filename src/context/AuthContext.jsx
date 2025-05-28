@@ -10,6 +10,7 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     const loadUser = async () => {
+      setLoading(true);
       try {
         const data = await apiFetchUser();
         setUser(data);

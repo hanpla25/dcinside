@@ -6,10 +6,12 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 
 export default function Login() {
+  const navigate = useNavigate();
   const { login, isLogin } = useAuth();
+
+  // state
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
 
   useEffect(() => {
     if (isLogin) {

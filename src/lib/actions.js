@@ -35,7 +35,7 @@ export const updateProfile = async (formData) => {
     userid: formData.userid,
     password: formData.password,
     nickname: formData.name,
-    newPassword: formData.password,
+    newPassword: formData.nextpassword,
   });
   return res.data;
 };

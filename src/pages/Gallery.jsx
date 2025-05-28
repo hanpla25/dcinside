@@ -9,21 +9,27 @@ import SearchInput from "../ui/gallery/SearchInput";
 import { fetchPostList } from "../lib/data";
 
 export default function Gallery() {
+  const navigate = useNavigate();
   const { category } = useParams();
   const { galleryList, loading: galleryLoading } = useGallery();
-  const [posts, setPosts] = useState([]);
-  const [totalCount, setTotalCount] = useState(0);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const galleryName = galleryList.find((item) => item.abbr === category)?.name;
-  const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
 
+  // state
+  const [posts, setPosts] = useState([]);
+  const [totalCount, setTotalCount] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // 페이지
+  const sizes = [1, 20, 30, 50];
+  const currentPage = parseInt(searchParams.get("page") || "1", 10);
+  const size = parseInt(searchParams.get("size") || "20", 10);
+  const totalPages = 16;
+
+  // 갤러리
+  const galleryName = galleryList.find((item) => item.abbr === category)?.name;
   const like_cut = searchParams.get("recomend") === "1" ? 10 : 0;
   const search = searchParams.get("search") || "";
-  const page = parseInt(searchParams.get("page") || "1", 10);
-  const size = parseInt(searchParams.get("size") || "20", 10);
-  const sizes = [1, 20, 30, 50];
 
   useEffect(() => {
     if (galleryLoading) return;
@@ -41,7 +47,7 @@ export default function Gallery() {
       try {
         const data = await fetchPostList({
           abbr: category,
-          page,
+          page: currentPage,
           like_cut,
           search,
           size,
@@ -56,7 +62,7 @@ export default function Gallery() {
     };
 
     loadPosts();
-  }, [category, like_cut, search, page, size]);
+  }, [category, like_cut, search, currentPage, size]);
 
   return (
     <div>
@@ -64,10 +70,11 @@ export default function Gallery() {
       <Tap setSearchParams={setSearchParams} size={size} sizes={sizes} />
       <PostList posts={posts} loading={loading} error={error} />
       <Pagination
-        page={page}
+        currentPage={currentPage}
         totalCount={totalCount}
         setSearchParams={setSearchParams}
         size={size}
+        totalPages={totalPages}
       />
       <SearchInput search={search} setSearchParams={setSearchParams} />
     </div>

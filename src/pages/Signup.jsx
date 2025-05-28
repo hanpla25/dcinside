@@ -4,10 +4,12 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 
 export default function Signup() {
+  const navigate = useNavigate();
   const { signup } = useAuth();
+
+  // state
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
 
   const handleSubmit = async (formData) => {
     setLoading(true);

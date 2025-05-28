@@ -12,7 +12,7 @@ export default function AuthForm({
     nickname: "",
   });
 
-  const handleChange = (e) => {
+  const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
@@ -26,6 +26,7 @@ export default function AuthForm({
     onSubmit(dataToSubmit);
   };
 
+  // 인풋 스타일
   const inputClass =
     "w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#3b4890]";
   const renderError = (fieldError) => (
@@ -43,7 +44,7 @@ export default function AuthForm({
             name="nickname"
             placeholder="닉네임"
             value={formData.nickname}
-            onChange={handleChange}
+            onChange={handleInputChange}
             className={inputClass}
           />
           {renderError(error?.userid || error?.message)}
@@ -56,7 +57,7 @@ export default function AuthForm({
         name="userid"
         placeholder="아이디"
         value={formData.userid}
-        onChange={handleChange}
+        onChange={handleInputChange}
         className={inputClass}
       />
       {renderError(error?.userid || error?.message)}
@@ -67,7 +68,7 @@ export default function AuthForm({
         name="password"
         placeholder="비밀번호"
         value={formData.password}
-        onChange={handleChange}
+        onChange={handleInputChange}
         className={inputClass}
       />
       {renderError(error?.password || error?.message)}
