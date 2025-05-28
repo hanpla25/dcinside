@@ -49,7 +49,7 @@ export function formatDateTime(datetime) {
     date.getDate() === now.getDate();
 
   const isThisYear = date.getFullYear() === now.getFullYear();
-  
+
   const timeString = date.toLocaleTimeString([], {
     hour: "2-digit",
     minute: "2-digit",
@@ -57,13 +57,15 @@ export function formatDateTime(datetime) {
   });
 
   if (isToday) {
-    return timeString; 
+    return timeString;
   } else {
     const options = isThisYear
-      ? { month: "2-digit", day: "2-digit" } 
-      : { year: "numeric", month: "2-digit", day: "2-digit" }; 
+      ? { month: "2-digit", day: "2-digit" }
+      : { year: "numeric", month: "2-digit", day: "2-digit" };
 
     const dateString = date.toLocaleDateString([], options);
     return `${dateString} ${timeString}`;
   }
 }
+
+

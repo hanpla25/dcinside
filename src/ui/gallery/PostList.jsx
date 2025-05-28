@@ -2,13 +2,12 @@ import { Link } from "react-router";
 import { formatDateTime } from "../../lib/utils";
 import SeparatorDot from "../SeparatorDot";
 
-export default function PostList({ posts }) {
-  if (!posts.length)
-    return (
-      <div className="py-10 text-center min-h-[73vh]">게시글이 없습니다.</div>
-    );
-
-  console.log(posts);
+export default function PostList({ posts, loading, error }) {
+  if (loading) return <div>로딩 중...</div>;
+  if (error) return <div>{error}</div>;
+  if (posts.length === 0)
+    return <div className="py-60 text-center">게시글이 없습니다.</div>;
+  
   return (
     <ul className="min-h-[50vh]">
       {posts.map((post) => (

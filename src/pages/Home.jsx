@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import BestPosts from "../ui/BestPosts";
-import { fetchBestPosts, fetchUser } from "../lib/data";
+import { fetchBestPosts } from "../lib/data";
 
 export default function Home() {
   const [bestPosts, setBestPosts] = useState([]);
@@ -10,9 +10,7 @@ export default function Home() {
     const loadBestPosts = async () => {
       try {
         const data = await fetchBestPosts();
-        const userdata = await fetchUser();
         setBestPosts(data);
-        console.log(userdata);
       } catch (err) {
         console.error("실시간 베스트 실패:", err);
       } finally {

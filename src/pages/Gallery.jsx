@@ -1,53 +1,60 @@
-import { useNavigate, useParams } from "react-router";
+import { useNavigate, useParams, useSearchParams } from "react-router";
 import GalleryHeader from "../ui/gallery/Header";
 import { useGallery } from "../context/GalleryContext";
+import { useEffect, useState } from "react";
 import Tap from "../ui/gallery/Tap";
 import PostList from "../ui/gallery/PostList";
-import { useEffect, useState } from "react";
 import { fetchPostList } from "../lib/data";
-import Loading from "../ui/Loading";
-import Pagination from "../ui/gallery/Pagination";
 
 export default function Gallery() {
   const { category } = useParams();
-  const { galleryList } = useGallery();
-  const [loading, setLoading] = useState(true);
-  const [postList, setPostList] = useState([]);
-  const valid = galleryList.some((g) => g.abbr === category);
+  const { galleryList, loading: galleryLoading } = useGallery();
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const galleryName = galleryList.find((item) => item.abbr === category)?.name;
   const navigate = useNavigate();
-  const galleryName = galleryList?.find((item) => item.abbr === category)?.name;
+  const [searchParams] = useSearchParams();
+
+  const like_cut = searchParams.get("recomend") === "1" ? 10 : 0;
+  const search = searchParams.get("search") || "";
 
   useEffect(() => {
-    if (galleryList.length === 0) return;
-    if (!valid) {
+    if (galleryLoading) return;
+    if (!galleryName) {
       navigate("/");
     }
-  }, [galleryList, valid, navigate]);
+  }, [galleryLoading, galleryName, navigate]);
 
   useEffect(() => {
-    const loadPost = async () => {
-      setLoading(true);
+    if (!category) return;
 
+    const loadPosts = async () => {
+      setLoading(true);
+      setError(null);
       try {
-        const data = await fetchPostList(category, 1);
-        setPostList(data.posts);
-      } catch (error) {
-        console.error("글 목록 로딩 실패", error);
+        const data = await fetchPostList({
+          abbr: category,
+          page: 1,
+          like_cut,
+          search,
+        });
+        setPosts(data.posts);
+      } catch (err) {
+        setError(err.message);
       } finally {
         setLoading(false);
       }
     };
-    loadPost();
-  }, [category, galleryList, navigate]);
 
-  const posts = postList?.filter((post) => post.category_name === galleryName);
+    loadPosts();
+  }, [category, like_cut, search]); 
 
   return (
     <div>
       <GalleryHeader category={category} galleryName={galleryName} />
       <Tap />
-      {loading ? <Loading /> : <PostList posts={posts} />}
-      <Pagination />
+      <PostList posts={posts} loading={loading} error={error} />
     </div>
   );
 }

@@ -19,10 +19,9 @@ export const fetchGalleryList = async () => {
   return res.data;
 };
 
-export const fetchPostList = async () => {
-  const page = 1;
+export const fetchPostList = async ({ abbr, page, like_cut, search }) => {
   const res = await apiClient.get("/post", {
-    params: { page },
+    params: { page, abbr, like_cut, search },
   });
   return res.data;
 };
