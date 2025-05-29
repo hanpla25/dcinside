@@ -9,10 +9,10 @@ import SearchInput from "../ui/gallery/SearchInput";
 import { fetchPostList } from "../lib/data";
 
 export default function Gallery() {
-  const navigate = useNavigate();
-  const { category } = useParams();
-  const { galleryList, loading: galleryLoading } = useGallery();
+  const { loading: galleryLoading, category, galleryName } = useGallery();
+
   const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
 
   // state
   const [posts, setPosts] = useState([]);
@@ -27,7 +27,6 @@ export default function Gallery() {
   const totalPages = Math.ceil(totalCount / size);
 
   // 갤러리
-  const galleryName = galleryList.find((item) => item.abbr === category)?.name;
   const like_cut = searchParams.get("recomend") === "1" ? 10 : 0;
   const search = searchParams.get("search") || "";
 
@@ -66,7 +65,7 @@ export default function Gallery() {
 
   return (
     <div>
-      <GalleryHeader category={category} galleryName={galleryName} />
+      <GalleryHeader />
       <Tap setSearchParams={setSearchParams} size={size} sizes={sizes} />
       <PostList posts={posts} loading={loading} error={error} />
       <Pagination

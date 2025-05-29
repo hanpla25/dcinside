@@ -11,15 +11,15 @@ export default function PostList({ posts, loading, error }) {
   return (
     <ul className="min-h-[60vh]">
       {posts.map((post) => (
-        <Link key={post.id} to={`/${post.id}`}>
+        <Link key={post.id} to={`${post.id}`}>
           <li className="p-2 border-b border-b-gray-400">
             <div>{post.title}</div>
             <div className="flex gap-1 text-xs text-gray-600">
-              <span>{post.nickname}</span>
+              <span>{post.nickname || "ㅇㅇ"}</span>
               <SeparatorDot />
               <span>{formatDateTime(post.create_at)}</span>
               <SeparatorDot />
-              <span>조회수 123</span>
+              <span>조회수 {post.view_count}</span>
               <SeparatorDot />
               <span>추천 {post.post_like_count}</span>
             </div>

@@ -14,25 +14,35 @@ import { AuthProvider } from "./context/AuthContext";
 import Profile from "./pages/Profile";
 import Gallery from "./pages/Gallery";
 import Writer from "./pages/Writer";
+import Post from "./pages/Post";
+import GalleryLayout from "./layout/GalleryLayout";
 
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
     <AuthProvider>
-      <GalleryProvider>
-        <Header />
-        <Nav />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/category" element={<Category />} />
-          <Route path="/create" element={<Create />} />
+      <Header />
+      <Nav />
+      <Routes>
+        <Route
+          element={
+            <GalleryProvider>
+              <GalleryLayout />
+            </GalleryProvider>
+          }
+        >
           <Route path="/gallery/:category" element={<Gallery />} />
-          <Route path="/writer/:category" element={<Writer />} />
-        </Routes>
-        <Footer />
-      </GalleryProvider>
+          <Route path="/gallery/:category/:view" element={<Post />} />
+          <Route path="/category" element={<Category />} />
+        </Route>
+
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/create" element={<Create />} />
+        <Route path="/writer/:category" element={<Writer />} />
+      </Routes>
+      <Footer />
     </AuthProvider>
   </BrowserRouter>
 );
