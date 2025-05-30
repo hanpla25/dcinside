@@ -1,5 +1,11 @@
-import GalleryHeader from "../ui/gallery/Header";
+import PostInfo from "../ui/gallery/PostInfo";
+import PostList from "../ui/gallery/PostList";
 
 export default function Post() {
-  return <GalleryHeader />;
+  return (
+    <div>
+      <PostInfo />
+      <PostList />
+    </div>
+  );
 }

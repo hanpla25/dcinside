@@ -1,81 +1,14 @@
-import { useNavigate, useParams, useSearchParams } from "react-router";
-import GalleryHeader from "../ui/gallery/Header";
-import { useGallery } from "../context/GalleryContext";
-import { useEffect, useState } from "react";
+import { useOutletContext } from "react-router";
 import Tap from "../ui/gallery/Tap";
 import PostList from "../ui/gallery/PostList";
-import Pagination from "../ui/gallery/Pagination";
-import SearchInput from "../ui/gallery/SearchInput";
-import { fetchPostList } from "../lib/data";
 
 export default function Gallery() {
-  const { loading: galleryLoading, category, galleryName } = useGallery();
-
-  const [searchParams, setSearchParams] = useSearchParams();
-  const navigate = useNavigate();
-
-  // state
-  const [posts, setPosts] = useState([]);
-  const [totalCount, setTotalCount] = useState(0);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  // 페이지
-  const sizes = [1, 20, 30, 50];
-  const currentPage = parseInt(searchParams.get("page") || "1", 10);
-  const size = parseInt(searchParams.get("size") || "20", 10);
-  const totalPages = Math.ceil(totalCount / size);
-
-  // 갤러리
-  const like_cut = searchParams.get("recomend") === "1" ? 10 : 0;
-  const search = searchParams.get("search") || "";
-
-  useEffect(() => {
-    if (galleryLoading) return;
-    if (!galleryName) {
-      navigate("/");
-    }
-  }, [galleryLoading, galleryName, navigate]);
-
-  useEffect(() => {
-    if (!category) return;
-
-    const loadPosts = async () => {
-      setLoading(true);
-      setError(null);
-      try {
-        const data = await fetchPostList({
-          abbr: category,
-          page: currentPage,
-          like_cut,
-          search,
-          size,
-        });
-        setPosts(data.posts);
-        setTotalCount(data.totalCount);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadPosts();
-  }, [category, like_cut, search, currentPage, size]);
+  const { posts, searchParams, setSearchParams, loading } = useOutletContext();
 
   return (
-    <div>
-      <GalleryHeader />
-      <Tap setSearchParams={setSearchParams} size={size} sizes={sizes} />
-      <PostList posts={posts} loading={loading} error={error} />
-      <Pagination
-        currentPage={currentPage}
-        totalCount={totalCount}
-        setSearchParams={setSearchParams}
-        size={size}
-        totalPages={totalPages}
-      />
-      <SearchInput search={search} setSearchParams={setSearchParams} />
-    </div>
+    <>
+      <Tap searchParams={searchParams} setSearchParams={setSearchParams} />
+      <PostList posts={posts} loading={loading} />
+    </>
   );
 }

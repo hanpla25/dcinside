@@ -1,13 +1,12 @@
 import { Link } from "react-router";
-import { useGallery } from "../../context/GalleryContext";
+import Loading from "../Loading";
 
-export default function GalleryList() {
-  const { galleryList, loading } = useGallery();
-
-  if (loading) return <div className="text-center py-4">로딩 중...</div>;
-
+export default function GalleryList({ galleryList, loading }) {
+  if (loading) {
+    return <Loading />;
+  }
   return (
-    <div className="min-h-[82.2vh]">
+    <div className="">
       <div className="flex justify-between text-xl font-semibold p-2 border-b border-gray-300">
         <span>전체 갤러리</span>
         <Link to="/create">

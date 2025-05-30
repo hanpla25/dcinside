@@ -15,7 +15,7 @@ export default function SearchInput({ search, setSearchParams }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="mx-4 my-2 flex gap-2">
+    <form onSubmit={handleSubmit} className="my-2 flex gap-2">
       <input
         type="text"
         value={keyword}

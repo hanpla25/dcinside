@@ -10,7 +10,7 @@ export default function Header() {
 
   return (
     <>
-      <header className="flex items-center bg-[#29367c] py-2 px-2">
+      <header className="flex items-center bg-[#29367c] py-2 px-2 max-w-7xl mx-auto">
         <Link to="/" className="flex items-center">
           <img
             src="/left_logo.png"

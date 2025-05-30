@@ -23,7 +23,7 @@ export default function Home() {
   if (loading) return <div className="text-center py-10">로딩 중...</div>;
 
   return (
-    <div>
+    <div className="max-w-7xl mx-auto">
       <BestPosts posts={bestPosts} />
     </div>
   );
