@@ -3,12 +3,12 @@ import Tap from "../ui/gallery/Tap";
 import PostList from "../ui/gallery/PostList";
 
 export default function Gallery() {
-  const { posts, searchParams, setSearchParams, loading } = useOutletContext();
+  const { posts, loading, category } = useOutletContext();
 
   return (
     <>
-      <Tap searchParams={searchParams} setSearchParams={setSearchParams} />
-      <PostList posts={posts} loading={loading} />
+      <Tap />
+      <PostList posts={posts} loading={loading} category={category} />
     </>
   );
 }

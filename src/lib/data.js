@@ -25,3 +25,13 @@ export const fetchPostList = async ({ abbr, page, like_cut, search, size }) => {
   });
   return res.data;
 };
+
+export const fetchPostInfo = async (id) => {
+  const res = await apiClient.get(`/post/${id}`);
+  return res.data;
+};
+
+export const fetchComments = async (id) => {
+  const res = await apiClient.get(`/comment/${id}`);
+  return res.data;
+};

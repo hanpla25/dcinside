@@ -1,18 +1,11 @@
 import SizeOptionButton from "./SizeOptionButton";
 import TapButtons from "./TapButtons";
 
-export default function Tap({ size, searchParams, setSearchParams }) {
+export default function Tap({ size }) {
   return (
     <div className="flex items-center border-b border-gray-200 px-2 justify-between">
-      <TapButtons
-        size={size}
-        searchParams={searchParams}
-        setSearchParams={setSearchParams}
-      />
-      <SizeOptionButton
-        searchParams={searchParams}
-        setSearchParams={setSearchParams}
-      />
+      <TapButtons size={size} />
+      <SizeOptionButton />
     </div>
   );
 }

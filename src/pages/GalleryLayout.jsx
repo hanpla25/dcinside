@@ -66,7 +66,7 @@ export default function GalleryLayout() {
   return (
     <div className="max-w-7xl mx-auto">
       <GalleryHeader category={category} galleryList={galleryList} />
-      <Outlet context={{ posts, searchParams, setSearchParams, loading }} />
+      <Outlet context={{ posts, loading, category, setPosts }} />
       <Pagination
         currentPage={currentPage}
         totalCount={totalCount}
@@ -74,7 +74,11 @@ export default function GalleryLayout() {
         size={size}
         totalPages={totalPages}
       />
-      <SearchInput search={search} setSearchParams={setSearchParams} />
+      <SearchInput
+        search={search}
+        setSearchParams={setSearchParams}
+        category={category}
+      />
     </div>
   );
 }

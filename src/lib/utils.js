@@ -39,7 +39,16 @@ export function createTouchSwipeHandlers({
   };
 }
 
-export function formatDateTime(datetime) {
+export function formatDateTime(
+  datetime,
+  {
+    showYear = false,
+    showMonth = true,
+    showDay = true,
+    showTime = true,
+    onlyTimeIfToday = false,
+  } = {}
+) {
   const date = new Date(datetime);
   const now = new Date();
 
@@ -48,24 +57,31 @@ export function formatDateTime(datetime) {
     date.getMonth() === now.getMonth() &&
     date.getDate() === now.getDate();
 
-  const isThisYear = date.getFullYear() === now.getFullYear();
-
   const timeString = date.toLocaleTimeString([], {
     hour: "2-digit",
     minute: "2-digit",
     hour12: false,
   });
 
-  if (isToday) {
-    return timeString;
-  } else {
-    const options = isThisYear
-      ? { month: "2-digit", day: "2-digit" }
-      : { year: "numeric", month: "2-digit", day: "2-digit" };
-
-    const dateString = date.toLocaleDateString([], options);
-    return `${dateString} ${timeString}`;
+  if (onlyTimeIfToday && isToday) {
+    return showTime ? timeString : "";
   }
+
+  const parts = [];
+
+  if (showYear && (!onlyTimeIfToday || !isToday)) {
+    parts.push(date.getFullYear());
+  }
+
+  if (showMonth) {
+    parts.push(String(date.getMonth() + 1).padStart(2, "0"));
+  }
+
+  if (showDay) {
+    parts.push(String(date.getDate()).padStart(2, "0"));
+  }
+
+  const dateString = parts.join(".");
+
+  return showTime ? `${dateString} ${timeString}` : dateString;
 }
-
-

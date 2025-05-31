@@ -44,3 +44,13 @@ export const handlePost = async (data) => {
   const res = await apiClient.post("/post", data);
   return res.data;
 };
+
+export const handleLikeButton = async (id) => {
+  const res = await apiClient.post(`/post/${id}/like`);
+  return res.data;
+};
+
+export const handleDislikeButton = async (id) => {
+  const res = await apiClient.post(`/post/${id}/dislike`);
+  return res.data;
+};

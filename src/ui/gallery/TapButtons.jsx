@@ -1,4 +1,8 @@
-export default function TapButtons({ searchParams, setSearchParams }) {
+import { useSearchParams } from "react-router";
+
+export default function TapButtons() {
+  const [searchParams, setSearchParams] = useSearchParams();
+
   const tabs = ["전체글", "개념글", "공지"];
   const tab =
     searchParams.get("notice") === "1"

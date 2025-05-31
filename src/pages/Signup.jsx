@@ -33,7 +33,7 @@ export default function Signup() {
   };
 
   return (
-    <div className="flex flex-col justify-center px-2.5 py-10">
+    <div className="flex flex-col justify-center px-2.5 py-10 max-w-7xl mx-auto">
       <AuthForm
         onSubmit={handleSubmit}
         buttonLabel={loading ? "가입 중..." : "회원가입"}

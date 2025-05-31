@@ -1,6 +1,8 @@
 import { useRef, useState } from "react";
+import { useSearchParams } from "react-router";
 
-export default function SizeOptionButton({ searchParams, setSearchParams }) {
+export default function SizeOptionButton({}) {
+  const [searchParams, setSearchParams] = useSearchParams();
   const sizes = [1, 20, 30, 50];
   const size = parseInt(searchParams.get("size") || "20", 10);
   const dropdownRef = useRef();
