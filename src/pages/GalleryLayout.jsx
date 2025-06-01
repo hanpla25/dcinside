@@ -12,9 +12,9 @@ export default function GalleryLayout() {
 
   // state
   const [galleryList, setGalleryList] = useState([]);
-  const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [totalCount, setTotalCount] = useState(0);
+  const [posts, setPosts] = useState([]);
 
   const like_cut = searchParams.get("recomend") === "1" ? 10 : 0;
   const search = searchParams.get("search") || "";

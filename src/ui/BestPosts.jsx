@@ -3,6 +3,7 @@ import { bestPosts } from "../lib/placeholder-data";
 
 export default function BestPosts({ posts }) {
   const data = posts?.length > 0 ? posts : bestPosts;
+  console.log(posts)
   return (
     <div className="font-semibold text-lg min-h-[82.2vh]">
       <Link to={"/dcbest"}>

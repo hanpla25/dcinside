@@ -40,8 +40,8 @@ export const updateProfile = async (formData) => {
   return res.data;
 };
 
-export const handlePost = async (data) => {
-  const res = await apiClient.post("/post", data);
+export const handlePost = async ({ abbr, title, content, password }) => {
+  const res = await apiClient.post("/post", { abbr, title, content, password });
   return res.data;
 };
 

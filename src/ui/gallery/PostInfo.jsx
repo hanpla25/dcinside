@@ -57,7 +57,11 @@ export default function PostInfo({ postInfo, postLoading, setPosts }) {
     <div className="py-4 space-y-4">
       <h1 className="text-2xl font-bold">{title}</h1>
       <div className="text-sm text-gray-500">
-        <span className="mr-2">{nickname || "ㅇㅇ"}</span>
+        <span className="mr-2">
+          {" "}
+          {nickname ||
+            `익명 (${postInfo.ip_addr.split(".").slice(0, 2).join(".")})`}
+        </span>
         <SeparatorDot />
         <span className="ml-2">{new Date(create_at).toLocaleString()}</span>
       </div>

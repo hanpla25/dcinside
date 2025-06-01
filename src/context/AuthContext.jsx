@@ -1,12 +1,14 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { handleSignup, handleLogin, handleLogout } from "../lib/actions";
 import { fetchUser as apiFetchUser } from "../lib/data";
+import { useNavigate } from "react-router";
 
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const loadUser = async () => {
@@ -45,6 +47,7 @@ export function AuthProvider({ children }) {
     try {
       await handleLogout();
       setUser(null);
+      navigate("/");
     } catch (error) {
       console.error("로그아웃 실패:", error);
     }

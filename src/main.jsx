@@ -14,6 +14,7 @@ import GalleryLayout from "./pages/GalleryLayout";
 import Gallery from "./pages/Gallery";
 import Post from "./pages/Post";
 import Create from "./pages/Create";
+import Write from "./pages/Write";
 
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
@@ -27,6 +28,7 @@ createRoot(document.getElementById("root")).render(
         <Route path="/profile" element={<Profile />} />
         <Route path="/category" element={<Category />} />
         <Route path="/create" element={<Create />} />
+        <Route path="/write/:category" element={<Write />} />
 
         <Route path="/gallery/:category" element={<GalleryLayout />}>
           <Route index element={<Gallery />} />

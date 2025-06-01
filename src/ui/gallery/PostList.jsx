@@ -15,7 +15,11 @@ export default function PostList({ posts, loading, category }) {
           <li className="p-2 border-b border-gray-400">
             <div>{post.title}</div>
             <div className="text-xs text-gray-600">
-              <span>{post.nickname || "ㅇㅇ"}</span>
+              <span>
+                {" "}
+                {post.nickname ||
+                  `익명 (${post.ip_addr.split(".").slice(0, 2).join(".")})`}
+              </span>
               <SeparatorDot />
               <span>
                 {formatDateTime(post.create_at, { onlyTimeIfToday: true })}

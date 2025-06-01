@@ -22,8 +22,6 @@ export default function Comment({ postId, postInfo }) {
     loadComment();
   }, []);
 
-  console.log(postInfo);
-
   return (
     <div className="mx-2">
       <div className="flex items-center gap-2 py-4 border-b-2 border-gray-400">
