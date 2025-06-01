@@ -17,7 +17,7 @@ export default function BestPosts({ posts }) {
                   {post.title}
                 </div>
                 <div className="text-sm text-red-600 shrink-0">
-                  [{post.comments}]
+                  [{post.comment_count || 0}]
                 </div>
               </div>
               <div className="text-sm font-light">{post.gallery}</div>

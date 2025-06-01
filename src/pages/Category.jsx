@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import GalleryList from "../ui/category/GalleryList";
 import { fetchGalleryList } from "../lib/data";
+import Loading from "../ui/Loading";
+import CategoryHeader from "../ui/category/CategoryHeader";
 
 export default function Category() {
   const [galleryList, setGalleryList] = useState([]);
@@ -22,11 +24,14 @@ export default function Category() {
     loadGalleryList();
   }, []);
 
-  console.log(galleryList);
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <div className="max-w-7xl mx-auto">
-      <GalleryList galleryList={galleryList} loading={loading} />
+      <CategoryHeader />
+      <GalleryList galleryList={galleryList} />
     </div>
   );
 }
