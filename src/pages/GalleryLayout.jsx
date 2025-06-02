@@ -19,7 +19,10 @@ export default function GalleryLayout() {
   const like_cut = searchParams.get("recomend") === "1" ? 10 : 0;
   const search = searchParams.get("search") || "";
   const currentPage = parseInt(searchParams.get("page") || "1", 10);
-  const size = parseInt(searchParams.get("size") || "20", 10);
+  const [size, setSize] = useState(() => {
+    const saved = parseInt(localStorage.getItem("size"), 10);
+    return isNaN(saved) ? 20 : saved;
+  });
   const totalPages = Math.ceil(totalCount / size);
 
   useEffect(() => {
@@ -66,7 +69,7 @@ export default function GalleryLayout() {
   return (
     <div className="max-w-7xl mx-auto">
       <GalleryHeader category={category} galleryList={galleryList} />
-      <Outlet context={{ posts, loading, category, setPosts }} />
+      <Outlet context={{ posts, loading, category, setPosts, setSize, size }} />
       <Pagination
         currentPage={currentPage}
         totalCount={totalCount}

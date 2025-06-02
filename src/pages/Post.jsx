@@ -47,12 +47,7 @@ export default function Post() {
       />
       <PostButtons category={category} postId={postId} />
       <Comment postId={postId} postInfo={postInfo} />
-      <PostList
-        posts={posts}
-        loading={loading}
-        category={category}
-        postId={postId}
-      />
+      <PostList posts={posts} loading={loading} category={category} />
     </div>
   );
 }

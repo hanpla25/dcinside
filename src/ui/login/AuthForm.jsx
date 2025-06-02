@@ -47,7 +47,7 @@ export default function AuthForm({
             onChange={handleInputChange}
             className={inputClass}
           />
-          {renderError(error?.userid || error?.message)}
+          {renderError(error?.nickname || error?.message)}
         </>
       )}
 

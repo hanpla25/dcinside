@@ -1,20 +1,13 @@
 import { useRef, useState } from "react";
-import { useSearchParams } from "react-router";
 
-export default function SizeOptionButton({}) {
-  const [searchParams, setSearchParams] = useSearchParams();
+export default function SizeOptionButton({ size, setSize }) {
   const sizes = [1, 20, 30, 50];
-  const size = parseInt(searchParams.get("size") || "20", 10);
   const dropdownRef = useRef();
   const [showSizeOptions, setShowSizeOptions] = useState(false);
 
-  const handleSizeClick = (newSize) => {
-    setSearchParams((prev) => {
-      const nextParams = new URLSearchParams(prev);
-      nextParams.set("size", String(newSize));
-      nextParams.set("page", "1");
-      return nextParams;
-    });
+  const handleSizeChange = (newSize) => {
+    localStorage.setItem("size", newSize);
+    setSize(newSize);
     setShowSizeOptions(false);
   };
 
@@ -37,7 +30,7 @@ export default function SizeOptionButton({}) {
               className={`cursor-pointer px-4 py-2 hover:bg-gray-100 ${
                 s === size ? "font-bold text-blue-600" : ""
               }`}
-              onClick={() => handleSizeClick(s)}
+              onClick={() => handleSizeChange(s)}
             >
               {s}개
             </li>

@@ -1,26 +1,27 @@
 import { useEffect, useState } from "react";
 import Comments from "./Comments";
 import { fetchComments } from "../../lib/data";
+import CommentForm from "./CommentForm";
 
 export default function Comment({ postId, postInfo }) {
   const [comments, setComments] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
+  const loadComment = async () => {
     setLoading(true);
+    try {
+      const data = await fetchComments(postId);
+      setComments(data);
+    } catch (error) {
+      console.log("댓글 불러오기 오류: ", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    const loadComment = async () => {
-      try {
-        const data = await fetchComments(postId);
-        setComments(data);
-      } catch (error) {
-        console.log("댓글 불러오기 오류: ", error);
-      } finally {
-        setLoading(false);
-      }
-    };
+  useEffect(() => {
     loadComment();
-  }, []);
+  }, [postId]);
 
   return (
     <div className="mx-2">
@@ -31,7 +32,12 @@ export default function Comment({ postId, postInfo }) {
           <img src="/refresh_icon.png" alt="refresh" />
         </button>
       </div>
-      <Comments comments={comments} loading={loading} />
+      <Comments
+        comments={comments}
+        loading={loading}
+        onCommentAdded={loadComment}
+      />
+      <CommentForm postId={postId} onCommentAdded={loadComment} />
     </div>
   );
 }

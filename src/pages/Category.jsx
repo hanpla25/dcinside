@@ -8,19 +8,18 @@ export default function Category() {
   const [galleryList, setGalleryList] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const loadGalleryList = async () => {
-    setLoading(true);
-    try {
-      const data = await fetchGalleryList();
-      setGalleryList(data);
-    } catch (error) {
-      console.log("갤러리 로딩 실패: ", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
+    const loadGalleryList = async () => {
+      setLoading(true);
+      try {
+        const data = await fetchGalleryList();
+        setGalleryList(data);
+      } catch (error) {
+        console.log("갤러리 리스트 오류: ", error);
+      } finally {
+        setLoading(false);
+      }
+    };
     loadGalleryList();
   }, []);
 

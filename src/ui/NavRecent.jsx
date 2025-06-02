@@ -26,7 +26,7 @@ export default function NavRecent({ onClose }) {
 
   return (
     <div
-      className="w-full bg-white border-t border-gray-200"
+      className="w-full bg-white border-t border-gray-200 max-w-7xl mx-auto"
       {...touchHandlers}
     >
       {/* 탭 */}

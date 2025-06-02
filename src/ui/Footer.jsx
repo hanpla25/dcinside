@@ -1,8 +1,10 @@
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 import { useAuth } from "../context/AuthContext";
 
 export default function Footer() {
   const { isLogin, logout } = useAuth();
+  const location = useLocation();
+
   return (
     <footer className="bg-[#3b4890] flex justify-center py-4 max-w-7xl mx-auto">
       {isLogin ? (
@@ -23,6 +25,7 @@ export default function Footer() {
       ) : (
         <Link
           to="/login"
+          state={{ from: location.pathname }}
           className="w-[100%] mx-2 py-2 border border-gray-400 text-white rounded-md font-medium text-center max-w-7xl"
         >
           로그인

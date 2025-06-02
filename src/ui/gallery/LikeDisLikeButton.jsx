@@ -5,7 +5,7 @@ export default function LikeDisLikeButton({
   onDislike,
 }) {
   return (
-    <div className="flex justify-center gap-4 mt-4">
+    <div className="flex justify-center gap-4 mt-8">
       <button
         onClick={onLike}
         className="flex items-center gap-1 px-3 py-1 text-[#3b4890] hover:bg-green-50"

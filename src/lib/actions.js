@@ -54,3 +54,24 @@ export const handleDislikeButton = async (id) => {
   const res = await apiClient.post(`/post/${id}/dislike`);
   return res.data;
 };
+
+export const handleCommentSubmit = async ({
+  post_id,
+  content,
+  password,
+  prev_comment_id,
+}) => {
+  const res = await apiClient.post(`/comment/${post_id}`, {
+    content,
+    password,
+    prev_comment_id,
+  });
+  return res.data;
+};
+
+export const deleteComment = async ({ comment_id, password }) => {
+  const res = await apiClient.delete(`/comment`, {
+    data: { comment_id, password },
+  });
+  return res.data;
+};

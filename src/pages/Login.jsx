@@ -3,11 +3,13 @@ import Checkbox from "../ui/login/Checkbox";
 import Links from "../ui/login/Links";
 import { useAuth } from "../context/AuthContext";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 
 export default function Login() {
-  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from || "/";
   const { login, isLogin } = useAuth();
+  const navigate = useNavigate();
 
   // state
   const [error, setError] = useState(null);
@@ -15,16 +17,15 @@ export default function Login() {
 
   useEffect(() => {
     if (isLogin) {
-      navigate("/");
+      navigate(from, { replace: true });
     }
-  }, [isLogin, navigate]);
+  }, [isLogin, navigate, from]);
 
   const handleSubmit = async (formData) => {
     setLoading(true);
     setError(null);
     try {
-      await login(formData);
-      navigate("/");
+      await login(formData, from);
     } catch (error) {
       console.error(error);
       const data = error.response?.data || {};

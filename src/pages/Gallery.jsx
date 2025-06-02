@@ -3,11 +3,11 @@ import Tap from "../ui/gallery/Tap";
 import PostList from "../ui/gallery/PostList";
 
 export default function Gallery() {
-  const { posts, loading, category } = useOutletContext();
+  const { posts, loading, category, size, setSize } = useOutletContext();
 
   return (
     <>
-      <Tap />
+      <Tap size={size} setSize={setSize} />
       <PostList posts={posts} loading={loading} category={category} />
     </>
   );

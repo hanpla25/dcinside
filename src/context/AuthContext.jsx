@@ -25,11 +25,12 @@ export function AuthProvider({ children }) {
     loadUser();
   }, []);
 
-  const login = async (loginData) => {
+  const login = async (loginData, from = "/") => {
     try {
       await handleLogin(loginData);
       const data = await apiFetchUser();
       setUser(data);
+      navigate(from, { replace: true });
     } catch (error) {
       throw error;
     }
