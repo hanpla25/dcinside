@@ -53,55 +53,63 @@ export default function Comments({
   return (
     <div className="space-y-4 py-2">
       {comments
-        .filter((c) => c.prev_comment_id === null) // 부모 댓글만
-        .map((parent) => (
-          <div key={parent.id}>
-            {/* 부모 댓글 */}
-            <div
-              className="border-b border-gray-400 py-2"
-              onClick={() => handleClick(parent)}
-            >
-              <div className="text-sm font-semibold text-gray-800 flex justify-between">
-                <span>
-                  {parent.nickname ||
-                    `익명 (${parent.ip_addr.split(".").slice(0, 2).join(".")})`}
-                </span>
-                {(parent.nickname === null ||
-                  user?.nickname === parent.nickname) && (
-                  <button
-                    className="mr-2"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleDelete(parent.id);
-                    }}
-                  >
-                    x
-                  </button>
-                )}
-              </div>
-              <div className="text-base text-gray-700 whitespace-pre-wrap">
-                {parent.content}
-              </div>
-              <div className="text-xs text-gray-400">
-                {formatDateTime(parent.create_at)}
-              </div>
-            </div>
+        .filter((c) => c.prev_comment_id === null)
+        .map((parent) => {
+          const isDeleted = parent.deleted;
+          const replies = comments.filter(
+            (reply) => reply.prev_comment_id === parent.id && !reply.deleted
+          );
 
-            {/* 답글 입력 폼 */}
-            {replyTargetId === parent.id && (
-              <CommentReplyForm
-                postId={postId}
-                commentId={commentId}
-                onCommentAdded={onCommentAdded}
-                setReplyTargetId={setReplyTargetId}
-              />
-            )}
+          return (
+            <div key={parent.id}>
+              {/* 부모 댓글 */}
+              <div
+                className="border-b border-gray-400 py-2"
+                onClick={() => !isDeleted && handleClick(parent)}
+              >
+                <div className="text-sm font-semibold text-gray-800 flex justify-between">
+                  <span>
+                    {parent.nickname ||
+                      `익명 (${parent.ip_addr
+                        .split(".")
+                        .slice(0, 2)
+                        .join(".")})`}
+                  </span>
+                  {!isDeleted &&
+                    (parent.nickname === null ||
+                      user?.nickname === parent.nickname) && (
+                      <button
+                        className="mr-2"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleDelete(parent.id);
+                        }}
+                      >
+                        x
+                      </button>
+                    )}
+                </div>
+                <div className="text-base text-gray-700 whitespace-pre-wrap">
+                  {isDeleted ? "삭제된 댓글입니다." : parent.content}
+                </div>
+                <div className="text-xs text-gray-400">
+                  {formatDateTime(parent.create_at)}
+                </div>
+              </div>
 
-            {/* 해당 댓글의 답글만 필터링 */}
-            <div className="ml-4 space-y-2">
-              {comments
-                .filter((reply) => reply.prev_comment_id === parent.id)
-                .map((reply) => (
+              {/* 답글 입력 폼 */}
+              {!isDeleted && replyTargetId === parent.id && (
+                <CommentReplyForm
+                  postId={postId}
+                  commentId={commentId}
+                  onCommentAdded={onCommentAdded}
+                  setReplyTargetId={setReplyTargetId}
+                />
+              )}
+
+              {/* 답글 */}
+              <div className="ml-4 space-y-2">
+                {replies.map((reply) => (
                   <div
                     key={reply.id}
                     className="pl-4 py-2 bg-gray-100 border-b border-gray-300 flex gap-2"
@@ -138,9 +146,10 @@ export default function Comments({
                     </div>
                   </div>
                 ))}
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
     </div>
   );
 }
