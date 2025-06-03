@@ -11,17 +11,17 @@ export default function Header() {
   return (
     <>
       <header className="flex items-center bg-[#29367c] py-2 px-2 max-w-7xl mx-auto">
-        <Link to="/" className="flex items-center">
+        <Link to="/" className="">
           <img
-            src="/left_logo.png"
+            src="/1748918753080_1.png"
             alt="로고"
             className=""
-            width={34}
-            height={26}
+            width={36}
+            height={36}
           />
         </Link>
 
-        <form className="flex flex-1 items-center justify-between bg-white ml-2 py-1.5">
+        <form className="flex flex-1 items-center justify-between bg-white ml-2 py-1">
           <div className="px-2 flex items-center h-full">
             <img
               src="/header_btn.png"
@@ -35,7 +35,7 @@ export default function Header() {
             type="text"
             placeholder="갤러리 & 통합검색"
             aria-label="갤러리 및 통합검색"
-            className="flex-1 w-full px-2 py-1 text-sm border-x border-gray-200 focus:outline-none"
+            className="flex-1 w-full px-1 py-1 text-sm border-x border-gray-200 focus:outline-none font-light"
           />
           <div className="px-2 flex items-center h-full">
             <img

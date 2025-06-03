@@ -6,6 +6,7 @@ import CommentForm from "./CommentForm";
 export default function Comment({ postId, postInfo }) {
   const [comments, setComments] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [commentId, setCommentId] = useState(null);
 
   const loadComment = async () => {
     setLoading(true);
@@ -36,8 +37,15 @@ export default function Comment({ postId, postInfo }) {
         comments={comments}
         loading={loading}
         onCommentAdded={loadComment}
+        commentId={commentId}
+        setCommentId={setCommentId}
+        postId={postId}
       />
-      <CommentForm postId={postId} onCommentAdded={loadComment} />
+      <CommentForm
+        postId={postId}
+        onCommentAdded={loadComment}
+        commentId={commentId}
+      />
     </div>
   );
 }
